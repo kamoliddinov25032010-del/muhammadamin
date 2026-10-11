@@ -1,0 +1,2613 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+<meta name="theme-color" content="#6366f1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Pog'ona — Ingliz tilini o'rganish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0a0e1a;--bg-2:#0f1422;--panel:rgba(255,255,255,.05);--panel-2:rgba(255,255,255,.08);
+  --text:#f1f5f9;--text-2:#94a3b8;--muted:#64748b;
+  --line:rgba(255,255,255,.08);--line-2:rgba(255,255,255,.15);
+  --primary:#8b5cf6;--primary-2:#6366f1;
+  --accent:#f59e0b;--success:#10b981;--danger:#ef4444;--gold:#fbbf24;--silver:#94a3b8;--bronze:#d97706;
+  --grad:linear-gradient(135deg,#8b5cf6 0%,#6366f1 50%,#3b82f6 100%);
+  --grad-2:linear-gradient(135deg,#f59e0b 0%,#ef4444 100%);
+  --grad-3:linear-gradient(135deg,#10b981 0%,#06b6d4 100%);
+  --grad-4:linear-gradient(135deg,#ec4899 0%,#8b5cf6 100%);
+  --radius:16px;--radius-lg:22px;
+  --shadow:0 8px 32px rgba(0,0,0,.4);--shadow-lg:0 20px 60px rgba(0,0,0,.5);
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+:root[data-theme="light"]{
+  --bg:#f8fafc;--bg-2:#ffffff;--panel:#ffffff;--panel-2:#f1f5f9;
+  --text:#0f172a;--text-2:#475569;--muted:#94a3b8;
+  --line:rgba(15,23,42,.08);--line-2:rgba(15,23,42,.15);
+  --shadow:0 8px 32px rgba(15,23,42,.1);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh;background:var(--bg);color:var(--text);
+  font:16px/1.6 'Manrope',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  padding-bottom:var(--safe-bottom);
+}
+body::before{
+  content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;z-index:-1;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(139,92,246,.15),transparent 50%),
+    radial-gradient(circle at 80% 60%,rgba(59,130,246,.12),transparent 50%);
+  animation:floatBg 25s ease-in-out infinite;
+}
+@keyframes floatBg{0%,100%{transform:translate(0,0)}50%{transform:translate(-3%,3%)}}
+h1,h2,h3,h4{font-family:'Bricolage Grotesque','Manrope',sans-serif;letter-spacing:-.03em;line-height:1.1;font-weight:800}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--primary);outline-offset:3px;border-radius:8px}
+::selection{background:var(--primary);color:#fff}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:10px}
+
+/* ============ HEADER ============ */
+.header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,14,26,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--line);
+  padding-top:var(--safe-top);
+}
+:root[data-theme="light"] .header{background:rgba(248,250,252,.85)}
+.header-inner{
+  max-width:1280px;margin:0 auto;padding:12px 16px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+}
+.brand{display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.04em;cursor:pointer}
+.brand-mark{
+  width:36px;height:36px;border-radius:10px;background:var(--grad);color:#fff;
+  display:grid;place-items:center;font:800 18px 'Bricolage Grotesque',sans-serif;
+  box-shadow:0 6px 20px rgba(139,92,246,.4);
+}
+.header-actions{display:flex;gap:6px;align-items:center}
+.icon-btn{
+  padding:8px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);
+  font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:5px;transition:all .2s;
+  min-height:40px;
+}
+.icon-btn:hover{border-color:var(--primary)}
+.user-chip{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 12px 6px 6px;border-radius:999px;
+  background:var(--panel);border:1px solid var(--line);
+  font-weight:700;font-size:13px;cursor:pointer;
+}
+.user-avatar{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--grad);color:#fff;
+  display:grid;place-items:center;
+  font-size:13px;font-weight:800;
+}
+
+/* ============ NAV ============ */
+.nav-wrap{max-width:1280px;margin:0 auto;padding:0 16px 10px;overflow-x:auto;scrollbar-width:none}
+.nav-wrap::-webkit-scrollbar{display:none}
+.nav{display:flex;gap:6px;padding-bottom:2px}
+.nav button{
+  white-space:nowrap;padding:8px 14px;border-radius:999px;
+  font-weight:700;font-size:13px;color:var(--text-2);
+  border:1px solid transparent;transition:all .2s;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.nav button.on{background:var(--grad);color:#fff;box-shadow:0 4px 16px rgba(139,92,246,.3)}
+
+/* ============ MAIN ============ */
+.main{max-width:1280px;margin:0 auto;padding:24px 16px 80px;min-height:60vh}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 22px;border-radius:14px;font-weight:700;font-size:15px;
+  transition:all .2s;white-space:nowrap;
+  background:var(--panel);border:1px solid var(--line-2);
+  min-height:48px;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn.primary{background:var(--grad);color:#fff;border:0;box-shadow:0 8px 24px rgba(139,92,246,.4)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line-2)}
+.btn.good{background:var(--grad-3);color:#fff;border:0}
+.btn.danger{background:var(--grad-2);color:#fff;border:0}
+.btn.sm{padding:8px 14px;font-size:13px;min-height:38px}
+.btn.lg{padding:16px 28px;font-size:17px;min-height:56px}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+
+/* ============ LOGIN ============ */
+.login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px 16px;
+}
+.login-card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:28px;padding:32px 24px;
+  max-width:420px;width:100%;
+  backdrop-filter:blur(30px);box-shadow:var(--shadow-lg);
+  position:relative;overflow:hidden;
+}
+.login-card::before{
+  content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;
+  background:radial-gradient(circle,rgba(139,92,246,.15),transparent 60%);
+  pointer-events:none;
+}
+.login-card > *{position:relative;z-index:1}
+.login-logo{
+  width:64px;height:64px;border-radius:20px;
+  background:var(--grad);color:#fff;margin:0 auto 20px;
+  display:grid;place-items:center;font:800 32px 'Bricolage Grotesque',sans-serif;
+  box-shadow:0 12px 32px rgba(139,92,246,.4);
+}
+.login-card h1{font-size:28px;text-align:center;margin-bottom:8px}
+.login-card .subtitle{text-align:center;color:var(--text-2);font-size:15px;margin-bottom:28px}
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em}
+.form-input{
+  width:100%;padding:14px 18px;border-radius:14px;
+  background:var(--bg-2);border:1.5px solid var(--line-2);
+  color:var(--text);font:16px 'Manrope',sans-serif;
+  transition:all .2s;min-height:52px;
+}
+.form-input:focus{outline:0;border-color:var(--primary);box-shadow:0 0 0 4px rgba(139,92,246,.15)}
+.form-input::placeholder{color:var(--muted)}
+.avatar-picker{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}
+.avatar-opt{
+  aspect-ratio:1;border-radius:14px;
+  background:var(--panel-2);border:2px solid var(--line);
+  font-size:24px;display:grid;place-items:center;
+  transition:all .2s;cursor:pointer;
+}
+.avatar-opt:hover{transform:scale(1.1)}
+.avatar-opt.sel{border-color:var(--primary);background:var(--grad);box-shadow:0 0 20px rgba(139,92,246,.4)}
+
+/* ============ HERO ============ */
+.hero{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:40px;
+  align-items:center;padding:20px 0 48px;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:999px;
+  background:var(--panel);border:1px solid var(--line);
+  font-size:12px;font-weight:700;color:var(--text-2);margin-bottom:20px;
+}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 10px var(--success);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(36px,7vw,72px);line-height:1.05;letter-spacing:-.04em;margin-bottom:20px}
+.hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--text-2);max-width:520px;font-size:16px;margin-bottom:28px;line-height:1.6}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:520px}
+.hero-stat{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;padding:14px 12px;text-align:center;
+  transition:all .2s;
+}
+.hero-stat:hover{transform:translateY(-3px);border-color:var(--primary)}
+.hero-stat b{display:block;font:800 22px 'Bricolage Grotesque',sans-serif;margin-bottom:2px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-stat span{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+
+/* ============ STAIRS ============ */
+.stairs{
+  display:flex;align-items:flex-end;gap:6px;height:340px;
+  padding:18px;border-radius:24px;
+  background:var(--panel);border:1px solid var(--line);
+  position:relative;overflow:hidden;
+}
+.step{
+  flex:1;border-radius:12px 12px 4px 4px;padding:12px 8px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;color:#fff;cursor:pointer;transition:all .3s;
+  animation:rise .9s cubic-bezier(.2,.8,.2,1) both;
+}
+.step:nth-child(1){background:linear-gradient(135deg,#10b981,#06b6d4)}
+.step:nth-child(2){background:linear-gradient(135deg,#06b6d4,#3b82f6)}
+.step:nth-child(3){background:linear-gradient(135deg,#3b82f6,#6366f1)}
+.step:nth-child(4){background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.step:nth-child(5){background:linear-gradient(135deg,#8b5cf6,#d946ef)}
+.step:nth-child(6){background:linear-gradient(135deg,#d946ef,#ec4899)}
+.step:hover{transform:translateY(-6px)}
+.step b{font:800 22px 'Bricolage Grotesque',sans-serif;margin-bottom:2px}
+.step span{font-size:10px;opacity:.9;line-height:1.2;font-weight:600}
+@keyframes rise{from{transform:translateY(80px);opacity:0}}
+
+/* ============ SECTION ============ */
+.section{margin-top:56px}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px;gap:16px;flex-wrap:wrap}
+.section-head h2{font-size:clamp(24px,4vw,38px);letter-spacing:-.03em}
+.section-head p{color:var(--text-2);font-size:14px;max-width:520px}
+
+/* ============ CARDS ============ */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius-lg);padding:20px;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.card.hoverable{cursor:pointer}
+.card.hoverable:hover{transform:translateY(-4px);border-color:var(--primary);box-shadow:0 16px 40px rgba(139,92,246,.2)}
+.card-icon{
+  width:52px;height:52px;border-radius:16px;
+  display:grid;place-items:center;font-size:26px;
+  margin-bottom:14px;background:var(--panel-2);
+}
+.card-icon.grad-1{background:var(--grad);color:#fff}
+.card-icon.grad-2{background:var(--grad-2);color:#fff}
+.card-icon.grad-3{background:var(--grad-3);color:#fff}
+.card-icon.grad-4{background:var(--grad-4);color:#fff}
+.card h3{font-size:19px;margin-bottom:6px}
+.card p{color:var(--text-2);font-size:13px;line-height:1.5;margin-bottom:12px}
+.card .tag{
+  display:inline-block;padding:4px 10px;border-radius:999px;
+  background:var(--panel-2);border:1px solid var(--line);
+  font-size:11px;font-weight:700;color:var(--text-2);
+}
+
+/* ============ LEADERBOARD ============ */
+.leaderboard{display:grid;gap:10px}
+.lb-row{
+  display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;transition:all .2s;
+}
+.lb-row:hover{transform:translateX(4px);border-color:var(--primary)}
+.lb-row.me{background:linear-gradient(180deg,rgba(139,92,246,.15),var(--panel));border-color:var(--primary);box-shadow:0 8px 24px rgba(139,92,246,.2)}
+.lb-rank{
+  width:40px;height:40px;border-radius:12px;
+  display:grid;place-items:center;
+  font:800 16px 'Bricolage Grotesque',sans-serif;
+  background:var(--panel-2);border:1px solid var(--line);
+}
+.lb-rank.gold{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#fff;border:0;box-shadow:0 6px 20px rgba(251,191,36,.4)}
+.lb-rank.silver{background:linear-gradient(135deg,#cbd5e1,#94a3b8);color:#fff;border:0}
+.lb-rank.bronze{background:linear-gradient(135deg,#d97706,#92400e);color:#fff;border:0}
+.lb-user{display:flex;align-items:center;gap:10px;min-width:0}
+.lb-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--grad);color:#fff;
+  display:grid;place-items:center;font-size:18px;flex-shrink:0;
+}
+.lb-name{font-weight:700;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-name small{display:block;color:var(--text-2);font-size:12px;font-weight:500}
+.lb-score{text-align:right}
+.lb-score b{display:block;font:800 18px 'Bricolage Grotesque',sans-serif;color:var(--primary)}
+.lb-score span{font-size:11px;color:var(--muted);font-weight:600}
+
+/* ============ PROFILE ============ */
+.profile-head{
+  display:flex;align-items:center;gap:20px;
+  padding:24px;background:var(--panel);border:1px solid var(--line);
+  border-radius:24px;margin-bottom:24px;flex-wrap:wrap;
+}
+.profile-avatar{
+  width:80px;height:80px;border-radius:24px;
+  background:var(--grad);color:#fff;
+  display:grid;place-items:center;font-size:40px;
+  box-shadow:0 12px 32px rgba(139,92,246,.4);flex-shrink:0;
+}
+.profile-info{flex:1;min-width:0}
+.profile-info h2{font-size:24px;margin-bottom:4px}
+.profile-info p{color:var(--text-2);font-size:14px}
+
+/* ============ QUIZ ============ */
+.quiz{max-width:820px;margin:0 auto}
+.quiz-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+.quiz-title{font-weight:700;font-size:14px;color:var(--text-2)}
+.quiz-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;border-radius:999px;
+  background:var(--panel);border:1px solid var(--line);
+  font-size:12px;font-weight:700;
+}
+.chip.good{background:rgba(16,185,129,.15);color:var(--success);border-color:rgba(16,185,129,.3)}
+.chip.timer{font-variant-numeric:tabular-nums}
+.chip.warn{background:rgba(245,158,11,.15);color:var(--accent)}
+.chip.danger{background:rgba(239,68,68,.15);color:var(--danger);animation:pulse 1s infinite}
+.progress{height:8px;background:var(--panel);border-radius:999px;overflow:hidden;margin-bottom:24px;border:1px solid var(--line)}
+.progress i{display:block;height:100%;background:var(--grad);transition:width .5s ease}
+.passage{
+  background:var(--panel);border:1px solid var(--line);
+  border-left:4px solid var(--primary);
+  border-radius:14px;padding:18px 20px;margin-bottom:20px;
+  font-size:16px;line-height:1.7;
+}
+.passage b{display:block;margin-bottom:8px;font-size:12px;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.q-text{font:700 clamp(20px,3.5vw,30px)/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.02em;margin-bottom:24px}
+.opts{display:grid;gap:10px}
+.opt{
+  display:flex;gap:14px;align-items:center;
+  text-align:left;width:100%;padding:16px 18px;
+  border:1.5px solid var(--line-2);
+  background:var(--panel);border-radius:14px;
+  font-size:16px;font-weight:600;
+  transition:all .2s;min-height:60px;
+}
+.opt:hover:not(:disabled){border-color:var(--primary);transform:translateX(4px)}
+.opt kbd{
+  font:700 13px 'Manrope',sans-serif;
+  min-width:28px;height:28px;padding:0 8px;
+  display:grid;place-items:center;
+  border:1px solid var(--line-2);border-radius:8px;
+  color:var(--text-2);flex-shrink:0;
+}
+.opt.sel{background:var(--grad);color:#fff;border-color:transparent}
+.opt.sel kbd{background:rgba(255,255,255,.2);color:#fff;border-color:transparent}
+.opt.good{background:var(--grad-3);color:#fff;border-color:transparent}
+.opt.good kbd{background:rgba(255,255,255,.2);color:#fff;border-color:transparent}
+.opt.badc{background:var(--grad-2);color:#fff;border-color:transparent}
+.opt.badc kbd{background:rgba(255,255,255,.2);color:#fff;border-color:transparent}
+.opt:disabled{cursor:default;transform:none}
+.expl{
+  margin-top:20px;padding:16px 20px;
+  background:var(--panel);border:1px solid var(--line);
+  border-left:4px solid var(--primary);
+  border-radius:14px;font-size:14px;line-height:1.6;
+  animation:slideDown .35s cubic-bezier(.2,.8,.2,1);
+}
+.expl b{color:var(--primary)}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}}
+.quiz-nav{display:flex;justify-content:space-between;gap:10px;margin-top:24px;flex-wrap:wrap}
+
+/* ============ RESULT ============ */
+.result{padding:20px 0}
+.result-hero{text-align:center;padding:32px 0}
+.result-level{
+  font:800 clamp(80px,18vw,160px)/.9 'Bricolage Grotesque',sans-serif;
+  letter-spacing:-.06em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;display:inline-block;
+  animation:zoomIn .8s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes zoomIn{from{transform:scale(.3) rotate(-10deg);opacity:0}}
+.result-title{font-size:clamp(22px,4vw,32px);margin-top:16px}
+.result-desc{color:var(--text-2);max-width:600px;margin:12px auto 0;font-size:15px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+.result-col h3{font-size:20px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.level-rows{display:grid;gap:8px}
+.level-row{
+  display:grid;grid-template-columns:44px 1fr 52px;gap:10px;align-items:center;
+  padding:10px 14px;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;font-weight:700;font-size:14px;
+}
+.level-row.pass{border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.08)}
+.level-row .bar{height:8px;background:var(--line);border-radius:999px;overflow:hidden}
+.level-row .bar i{display:block;height:100%;background:var(--grad);transition:width .8s}
+.level-row.pass .bar i{background:var(--grad-3)}
+.level-row span:last-child{text-align:right;color:var(--text-2);font-size:12px}
+.wrong-list{display:grid;gap:8px}
+.wrong-item{
+  background:var(--panel);border:1px solid var(--line);
+  border-left:4px solid var(--danger);
+  border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.6;
+}
+.wrong-item small{display:block;color:var(--muted);font-size:10px;margin-bottom:4px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.wrong-item .correct{color:var(--success);font-weight:700}
+
+/* ============ STATS ============ */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.stat-box{
+  background:var(--panel);border:1px solid var(--line);border-radius:18px;
+  padding:18px 14px;text-align:center;
+}
+.stat-box b{display:block;font:800 28px 'Bricolage Grotesque',sans-serif;margin-bottom:4px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stat-box span{font-size:11px;color:var(--text-2);font-weight:700;letter-spacing:.05em}
+.hist{display:flex;gap:8px;flex-wrap:wrap}
+.hist-item{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;
+  display:inline-flex;gap:6px;align-items:center;
+}
+.hist-item b{color:var(--primary);font-weight:800}
+
+/* ============ ACHIEVEMENTS ============ */
+.achievements{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.achv{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:18px;padding:16px;text-align:center;
+  transition:all .3s;position:relative;
+}
+.achv.locked{opacity:.35;filter:grayscale(1)}
+.achv.unlocked{
+  border-color:transparent;
+  background:linear-gradient(180deg,rgba(139,92,246,.15),var(--panel));
+}
+.achv.unlocked::after{
+  content:'✓';position:absolute;top:8px;right:8px;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--grad-3);color:#fff;
+  display:grid;place-items:center;font-size:12px;font-weight:800;
+}
+.achv-emoji{font-size:36px;margin-bottom:8px;display:block;line-height:1}
+.achv b{display:block;font-size:14px;margin-bottom:4px}
+.achv small{color:var(--text-2);font-size:11px;line-height:1.4;display:block}
+
+/* ============ FLASHCARD ============ */
+.flashcard{
+  width:100%;min-height:300px;
+  border:1px solid var(--line-2);border-radius:24px;
+  background:var(--panel);padding:24px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;text-align:center;cursor:pointer;transition:all .3s;
+  font:800 clamp(28px,6vw,52px)/1.15 'Bricolage Grotesque',sans-serif;
+  letter-spacing:-.03em;
+}
+.flashcard:hover{border-color:var(--primary);transform:translateY(-3px)}
+.flashcard small{font:500 13px 'Manrope',sans-serif;color:var(--text-2);letter-spacing:0}
+
+/* ============ TIPS ============ */
+.tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.tip{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:18px;padding:18px;display:flex;gap:12px;align-items:start;
+}
+.tip-icon{font-size:28px;line-height:1;flex-shrink:0}
+.tip h4{font-size:15px;margin-bottom:4px}
+.tip p{font-size:13px;color:var(--text-2);line-height:1.55}
+
+/* ============ FOOTER (davomi) ============ */
+.footer p{color:var(--muted);font-size:12px}
+.footer-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.footer-links a{
+  font-size:13px;font-weight:700;color:var(--text-2);
+  transition:all .2s;padding:6px 10px;border-radius:10px;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.footer-links a:hover{color:var(--primary);background:var(--panel)}
+.footer-copy{text-align:right;color:var(--muted);font-size:11px}
+
+/* ============ TOAST ============ */
+.toast{
+  position:fixed;bottom:calc(24px + var(--safe-bottom));left:50%;
+  transform:translate(-50%,150%);
+  background:var(--text);color:var(--bg);
+  padding:14px 22px;border-radius:14px;
+  font-weight:700;font-size:14px;
+  box-shadow:var(--shadow-lg);
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  z-index:1000;pointer-events:none;
+  max-width:calc(100vw - 32px);text-align:center;
+}
+.toast.on{transform:translate(-50%,0)}
+.toast.success{background:var(--success);color:#fff}
+.toast.error{background:var(--danger);color:#fff}
+
+/* ============ MODAL ============ */
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  display:none;align-items:center;justify-content:center;
+  z-index:500;padding:16px;
+}
+.modal.on{display:flex;animation:fadeIn .3s}
+.modal-inner{
+  background:var(--bg-2);border:1px solid var(--line);
+  border-radius:24px;padding:32px 24px;
+  max-width:480px;width:100%;
+  box-shadow:var(--shadow-lg);
+  animation:modalIn .4s cubic-bezier(.2,.8,.2,1);
+  text-align:center;position:relative;overflow:hidden;
+  max-height:90vh;overflow-y:auto;
+}
+@keyframes fadeIn{from{opacity:0}}
+@keyframes modalIn{from{opacity:0;transform:scale(.9) translateY(30px)}}
+.modal-emoji{font-size:64px;margin-bottom:16px;display:block;animation:bounce .8s}
+@keyframes bounce{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+
+/* ============ CONFETTI ============ */
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:1000;overflow:hidden}
+.confetti i{position:absolute;animation:fall 3s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+/* ============ CERTIFICATE ============ */
+.certificate{
+  background:var(--panel);border:2px solid var(--primary);
+  border-radius:20px;padding:28px 20px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.certificate h2{font-size:22px;margin-bottom:6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.certificate .cert-level{font:800 72px 'Bricolage Grotesque',sans-serif;letter-spacing:-.05em;margin:12px 0;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.certificate .cert-name{font-size:16px;font-weight:700;margin:16px 0 8px;border-bottom:2px dashed var(--line-2);padding-bottom:6px;display:inline-block;min-width:200px}
+.certificate .cert-date{color:var(--text-2);font-size:12px;margin-top:12px}
+
+/* ============ CALENDAR ============ */
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:16px}
+.cal-day{
+  aspect-ratio:1;border-radius:8px;
+  background:var(--panel);border:1px solid var(--line);
+  display:grid;place-items:center;font-size:11px;font-weight:700;
+  color:var(--text-2);transition:all .2s;
+}
+.cal-day.active{background:var(--grad);color:#fff;border-color:transparent}
+.cal-day.today{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ============ MOBILE FIRST ============ */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:12px 0 32px}
+  .stairs{height:240px}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .result-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr;text-align:center;gap:16px}
+  .footer-copy{text-align:center}
+}
+@media(max-width:600px){
+  .main{padding:18px 14px 60px}
+  .header-inner{padding:10px 14px}
+  .nav-wrap{padding:0 14px 8px}
+  .brand{font-size:18px}
+  .brand-mark{width:32px;height:32px;font-size:16px}
+  .hero h1{font-size:32px}
+  .opt{padding:14px 16px;font-size:15px;min-height:56px}
+  .q-text{font-size:19px}
+  .btn{padding:11px 18px;font-size:14px;min-height:44px}
+  .btn.lg{padding:14px 22px;font-size:15px;min-height:50px}
+  .card{padding:16px}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .achv{padding:14px 10px}
+  .achv-emoji{font-size:30px}
+  .lb-row{padding:12px 14px;gap:10px}
+  .lb-avatar{width:32px;height:32px;font-size:15px}
+  .lb-rank{width:34px;height:34px;font-size:14px}
+  .profile-head{padding:18px;gap:14px}
+  .profile-avatar{width:64px;height:64px;font-size:32px}
+  .profile-info h2{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+<div class="toast" id="toast"></div>
+<div class="modal" id="modal"><div class="modal-inner" id="modalInner"></div></div>
+<div class="confetti" id="confetti"></div>
+
+<script>
+/* ============================================================
+   POG'ONA v4.0 — Login + Reyting + Mobil
+   Muhammadamin tomonidan, 2026
+   ============================================================ */
+(function(){
+"use strict";
+
+/* ============ DATA ============ */
+var LEVELS = ["A1","A2","B1","B2","C1","C2"];
+var LEVEL_INFO = {
+  "Pre-A1":{name:"Boshlang'ichdan past",emoji:"🌱",desc:"Alifbodan boshlang. Har bir mutaxassis bir vaqtlar noldan boshlagan!",tips:["Alifbo o'rganing","Kuniga 10 so'z","Duolingo ilovasini sinab ko'ring","Oddiy qo'shiqlar tinglang"],next:"A1"},
+  "A1":{name:"Beginner",emoji:"🐣",desc:"Oddiy jumlalarni tushunasiz. Endi poydevorni mustahkamlash vaqti.",tips:["Kuniga 15 daqiqa mashq","500 ta asosiy so'z","to be, to have fe'llari","Oddiy dialoglar"],next:"A2"},
+  "A2":{name:"Elementary",emoji:"🐥",desc:"Kundalik muloqotga yetarli. Zamonlar vaqti keldi.",tips:["Past Simple, Future","Qisqa hikoyalar","Podkastlarni sekin tinglang","Kuniga 20 daqiqa gapirish"],next:"B1"},
+  "B1":{name:"Intermediate",emoji:"🦅",desc:"Mustaqil gaplashasiz. Murakkab grammatika vaqti.",tips:["Present Perfect, Passive","Podkastlar tabiiy tezlikda","Kitob o'qing","5 jumla kuniga"],next:"B2"},
+  "B2":{name:"Upper-Intermediate",emoji:"🦁",desc:"Erkin gaplashasiz. IELTS 5.5-6.5 darajasi.",tips:["Idiomalar va frazal fe'llar","Rasmiy yozuv","Filmlar subtitrsiz","IELTS tayyorlov"],next:"C1"},
+  "C1":{name:"Advanced",emoji:"🦉",desc:"Murakkab matnlarni tushunasiz. IELTS 7-8 darajasi.",tips:["Inversiya, nozik grammatika","Akademik maqolalar","Adabiyot asl tilida","Professional ish"],next:"C2"},
+  "C2":{name:"Proficient",emoji:"👑",desc:"Ona tili egasiga yaqin. Professional tarjima vaqti.",tips:["Adabiyot asl tilida","She'riyat bilan ishlash","Tarjima ko'nikmalari","Ilmiy maqolalar"],next:null}
+};
+
+/* ============ 60 SAVOL (10 har daraja) ============ */
+var RAW = [
+  /* A1 - 10 */
+  ["She ___ a student.",["am","is","are","be"],1],
+  ["I ___ coffee every morning.",["drink","drinks","drinking","drank"],0],
+  ["This is ___ apple.",["a","an","two","some"],1],
+  ["___ are my keys?",["What","Where","Who","When"],1],
+  ["There ___ two books.",["is","are","am","be"],1],
+  ["My name ___ Aziz.",["am","is","are","be"],1],
+  ["I ___ from Uzbekistan.",["am","is","are","be"],0],
+  ["She ___ two brothers.",["have","has","having","haves"],1],
+  ["___ is your name?",["What","Where","Who","When"],0],
+  ["We ___ students.",["am","is","are","be"],2],
+  /* A2 - 10 */
+  ["Yesterday we ___ to the market.",["go","goes","went","gone"],2],
+  ["He is ___ than his brother.",["tall","taller","tallest","more tall"],1],
+  ["I ___ TV when you called.",["watch","was watching","watched","am watching"],1],
+  ["We don't have ___ milk.",["some","any","a","many"],1],
+  ["I'm going to ___ my grandparents.",["visit","visiting","visited","visits"],0],
+  ["She ___ her homework already.",["finish","finishes","has finished","finishing"],2],
+  ["This book is ___ than that one.",["interesting","more interesting","most interesting","interestinger"],1],
+  ["I've lived here ___ two years.",["since","for","from","during"],1],
+  ["He ___ to school every day.",["walk","walks","walking","walked"],1],
+  ["They ___ playing football now.",["is","am","are","be"],2],
+  /* B1 - 10 */
+  ["If it rains, we ___ at home.",["stay","will stay","would stay","stayed"],1],
+  ["I have lived here ___ 2019.",["for","since","from","during"],1],
+  ["The report ___ by the manager.",["wrote","was written","is writing","has wrote"],1],
+  ["She asked me where ___.",["I lived","did I live","do I live","I do live"],0],
+  ["You ___ smoke here. It's forbidden.",["mustn't","don't have to","needn't","may"],0],
+  ["He's been working here ___ 2015.",["since","for","from","during"],0],
+  ["I wish I ___ more time yesterday.",["have","had","would have","will have"],1],
+  ["The book ___ I read was amazing.",["who","which","whose","what"],1],
+  ["I ___ never been to Paris.",["have","has","had","am"],0],
+  ["She's been ___ English for 3 years.",["learn","learning","learned","learns"],1],
+  /* B2 - 10 */
+  ["If I ___ more time, I would learn another language.",["have","had","would have","will have"],1],
+  ["By the time we arrived, the film ___.",["already started","had already started","has started","was starting"],1],
+  ["He suggested ___ a taxi.",["to take","taking","take","took"],1],
+  ["I wish I ___ speak French.",["can","could","would","will"],1],
+  ["The policy, ___ was announced, caused debate.",["who","whose","which","what"],2],
+  ["She's used to ___ up early.",["get","getting","got","gets"],1],
+  ["Not until later ___ the truth.",["I realized","did I realize","I did realize","realized I"],1],
+  ["It's the first time I ___ such a thing.",["see","saw","have seen","had seen"],2],
+  ["He's looking forward to ___ you.",["see","seeing","saw","seen"],1],
+  ["I'd rather you ___ tomorrow.",["come","came","coming","comes"],1],
+  /* C1 - 10 */
+  ["Had I known, I ___ earlier.",["would leave","would have left","had left","will have left"],1],
+  ["She is known for her ___ attention.",["meticulous","meticulously","meticulosity","meticule"],0],
+  ["Not only ___ the exam, but she got top score.",["she passed","did she pass","she did pass","passed she"],1],
+  ["It's high time the government ___ action.",["takes","took","will take","has taken"],1],
+  ["The film received ___ reviews.",["mixed","blended","combined","scattered"],0],
+  ["Little ___ that he was watched.",["he knew","did he know","he did know","knew he"],1],
+  ["She would rather ___ at home.",["stay","to stay","staying","stayed"],0],
+  ["___ his help, we would have failed.",["But for","Except for","Besides","Apart from"],0],
+  ["The proposal is still ___ consideration.",["in","on","at","by"],0],
+  ["The results were ___ disappointing.",["somewhat","someway","somehow","somewhere"],0],
+  /* C2 - 10 */
+  ["Hardly ___ the building when the alarm went off.",["he had entered","had he entered","did he enter","he entered"],1],
+  ["Her argument was ultimately ___.",["specious","spacious","precious","auspicious"],0],
+  ["The minister's statement was deliberately ___.",["equivocal","equitable","equable","equestrian"],0],
+  ["Were it not for her, the project ___ collapsed.",["would have","will have","had","would"],0],
+  ["The theories are ___.",["complementary","complimentary","complemental","compliant"],0],
+  ["His ___ demeanor belied ambition.",["unassuming","unassumed","assuming","assumed"],0],
+  ["The proposal was met with ___ silence.",["stony","stone","stoned","stoning"],0],
+  ["She has an ___ memory.",["unerring","unerred","erring","erred"],0],
+  ["The ___ of the matter is complex.",["crux","cruxes","cruxed","cruxing"],0],
+  ["He was ___ to admit his mistake.",["loath","loathe","loathing","loathed"],0]
+];
+
+/* ============ LUG'AT (80 so'z) ============ */
+var VOCAB = [
+  ["borrow","qarz olmoq"],["lend","qarz bermoq"],["reliable","ishonchli"],["achieve","erishmoq"],
+  ["huge","ulkan"],["improve","yaxshilamoq"],["schedule","jadval"],["ancient","qadimiy"],
+  ["employer","ish beruvchi"],["employee","xodim"],["neighbor","qo'shni"],["delay","kechikish"],
+  ["deadline","oxirgi muddat"],["environment","atrof-muhit"],["knowledge","bilim"],["journey","sayohat"],
+  ["careful","ehtiyotkor"],["weather","ob-havo"],["skill","ko'nikma"],["opportunity","imkoniyat"],
+  ["challenge","qiyinchilik"],["success","muvaffaqiyat"],["failure","muvaffaqiyatsizlik"],["decision","qaror"],
+  ["advice","maslahat"],["opinion","fikr"],["reason","sabab"],["purpose","maqsad"],
+  ["result","natija"],["method","usul"],["quality","sifat"],["quantity","miqdor"],
+  ["increase","oshmoq"],["decrease","kamaymoq"],["compare","taqqoslamoq"],["describe","ta'riflamoq"],
+  ["explain","tushuntirmoq"],["suggest","taklif qilmoq"],["recommend","tavsiya qilmoq"],["consider","hisobga olmoq"],
+  ["develop","rivojlantirmoq"],["manage","boshqarmoq"],["support","qo'llab-quvvatlamoq"],["prevent","oldini olmoq"],
+  ["avoid","chetlab o'tmoq"],["allow","ruxsat bermoq"],["require","talab qilmoq"],["provide","ta'minlamoq"],
+  ["receive","qabul qilmoq"],["deliver","yetkazmoq"],["establish","o'rnatmoq"],["maintain","saqlab turmoq"],
+  ["reduce","kamaytirmoq"],["expand","kengaytirmoq"],["protect","himoya qilmoq"],["destroy","yo'q qilmoq"],
+  ["create","yaratmoq"],["replace","almashtirmoq"],["recognize","tanimoq"],["imagine","tasavvur qilmoq"],
+  ["approach","yondashuv"],["benefit","foyda"],["concern","tashvish"],["courage","jasorat"],
+  ["efficient","samarali"],["frequent","tez-tez"],["generous","saxiy"],["honest","halol"],
+  ["include","o'z ichiga olmoq"],["involve","jalb qilmoq"],["mention","eslatmoq"],["observe","kuzatmoq"],
+  ["prepare","tayyorlamoq"],["produce","ishlab chiqarmoq"],["respond","javob bermoq"],["select","tanlamoq"]
+];
+
+/* ============ GRAMMATIKA (30) ============ */
+var GRAMMAR = [
+  ["She ___ to school every day.",["goes","go","going","gone"],0,"he/she/it + -s"],
+  ["I have ___ finished.",["already","ago","tomorrow","since"],0,"already + Present Perfect"],
+  ["There isn't ___ water.",["some","any","a","an"],1,"Inkor gapda any"],
+  ["They ___ football when it rained.",["played","were playing","play","have played"],1,"Past Continuous"],
+  ["This is the ___ book.",["best","better","good","most good"],0,"good → best"],
+  ["If I ___ you, I would apologize.",["am","was","were","be"],2,"Second Conditional"],
+  ["She enjoys ___ novels.",["read","to read","reading","reads"],2,"enjoy + -ing"],
+  ["The window ___ last night.",["broke","was broken","is broken","has broke"],1,"Passive"],
+  ["He doesn't ___ spicy food.",["likes","like","liking","liked"],1,"doesn't + bare inf"],
+  ["I'll call as soon as I ___ home.",["get","will get","got","am getting"],0,"Present Simple"],
+  ["By next year, I ___ here 5 years.",["will work","will have worked","work","worked"],1,"Future Perfect"],
+  ["She made me ___ for hours.",["wait","to wait","waiting","waited"],0,"make + bare inf"],
+  ["I'd rather ___ now.",["leave","to leave","leaving","left"],0,"would rather + bare inf"],
+  ["It's worth ___ this book.",["read","to read","reading","reads"],2,"worth + -ing"],
+  ["He denied ___ the money.",["steal","to steal","stealing","stole"],2,"deny + -ing"],
+  ["I'm looking forward to ___ you.",["see","seeing","saw","seen"],1,"to + -ing"],
+  ["Neither John ___ Mary came.",["or","nor","and","but"],1,"neither...nor"],
+  ["The more you practice, ___ you become.",["the better","better","the best","best"],0,"the more...the better"],
+  ["She's the woman ___ car was stolen.",["who","which","whose","that"],2,"whose"],
+  ["Only after the meeting ___ the news.",["he heard","did he hear","he did hear","heard he"],1,"Inversion"],
+  ["I wish I ___ studied harder.",["have","had","would","will"],1,"wish + Past Perfect"],
+  ["He's said ___ leaving soon.",["to be","be","being","been"],0,"Passive infinitive"],
+  ["___ having little money, he was happy.",["Despite","Although","However","Because"],0,"Despite + noun"],
+  ["Hardly had I arrived ___ it started raining.",["than","when","that","then"],1,"Hardly...when"],
+  ["The house ___ we stayed was old.",["which","where","that","who"],1,"where"],
+  ["It's time we ___ home.",["go","went","going","gone"],1,"It's time + Past"],
+  ["He's used to ___ up early.",["get","getting","got","gets"],1,"used to + -ing"],
+  ["The news ___ surprising.",["is","are","were","be"],0,"news — singular"],
+  ["Mathematics ___ my favorite subject.",["is","are","were","be"],0,"fanlar — singular"],
+  ["If I ___ you, I wouldn't do that.",["am","was","were","be"],2,"Second Conditional"]
+];
+
+/* ============ O'QISH (6 matn) ============ */
+var READINGS = [
+  { title:"Tom's Day", text:"Tom wakes up at six every morning. He runs in the park for thirty minutes, then has breakfast with his sister. He works at a bookshop, and he loves it because he can read new books for free. On weekends, he visits his grandmother in the countryside.",
+    q:[["What does Tom do after he wakes up?",["He runs","He works","He reads","He sleeps"],0],["Why does Tom love his job?",["Pays well","Free books","Close","Sister works"],1],["Where does his grandmother live?",["City","Bookshop","Countryside","Park"],2],["When does Tom visit her?",["Morning","Weekdays","Evening","Weekends"],3]] },
+  { title:"Learning Languages", text:"Learning a new language takes time and patience. Experts suggest studying for fifteen minutes every day rather than three hours once a week. Consistency matters more than intensity. Reading simple books, listening to podcasts, and speaking with natives are all effective.",
+    q:[["What do experts suggest?",["3 hours weekly","15 min daily","Only weekends","Nothing"],1],["What matters more?",["Intensity","Consistency","Speed","Money"],1],["Which is NOT mentioned?",["Reading","Podcasts","Speaking","Watching TV"],3],["What is the key?",["Hard work","Enjoyable","Money","Speed"],1]] },
+  { title:"Remote Work", text:"Remote work has transformed the modern workplace. Employees save time on commuting and can design their own schedules. However, it also brings challenges: isolation, difficulty separating work from personal life, and the need for strong self-discipline. Companies are responding by offering hybrid models.",
+    q:[["What benefit is mentioned?",["Free food","No commuting","Higher salary","More meetings"],1],["Which is NOT a challenge?",["Isolation","Work-life separation","Self-discipline","Higher salary"],3],["What are companies offering?",["Only remote","Only office","Hybrid models","No work"],2],["What is the aim?",["Reduce salary","Best of both worlds","Close offices","Fire employees"],1]] },
+  { title:"Healthy Habits", text:"Research shows that small daily habits have a bigger impact on health than occasional intense workouts. Drinking enough water, walking for twenty minutes, and sleeping seven to eight hours are simple but powerful. Nutritionists recommend eating vegetables with every meal.",
+    q:[["What has bigger impact?",["Occasional workouts","Small daily habits","Skipping meals","Sleeping less"],1],["How long should you walk?",["5 min","20 min","2 hours","All day"],1],["What should you avoid?",["Vegetables","Water","Sugary drinks","Sleep"],2],["What matters most?",["Perfection","Consistency","Speed","Money"],1]] },
+  { title:"Climate Change", text:"Climate change is one of the most pressing issues of our time. Rising global temperatures cause extreme weather events, rising sea levels, and disruption to ecosystems. Scientists agree that human activity, particularly the burning of fossil fuels, is the primary cause. Renewable energy sources offer hope.",
+    q:[["What causes extreme weather?",["Rising temps","Cold winters","Heavy rain","Volcanoes"],0],["What is the primary cause?",["Natural cycles","Human activity","Solar flares","Volcanoes"],1],["What offers hope?",["Fossil fuels","Renewable energy","Coal","Oil"],1],["Who agrees on the cause?",["Politicians","Scientists","Businessmen","Artists"],1]] },
+  { title:"Artificial Intelligence", text:"Artificial intelligence is rapidly changing how we live and work. AI systems can now translate languages, diagnose diseases, and even create art. While this brings many benefits, it also raises concerns about job displacement and ethical issues. Experts call for careful regulation and responsible development.",
+    q:[["What can AI do?",["Only math","Translate languages","Only games","Nothing"],1],["What concern is mentioned?",["Too fast","Job displacement","Too slow","Too cheap"],1],["What do experts call for?",["Less AI","Careful regulation","More speed","No change"],1],["What is the tone?",["Negative","Balanced","Only positive","Angry"],1]] }
+];
+
+/* ============ TINGLASH (15) ============ */
+var LISTENING = [
+  ["The weather tomorrow will be sunny with a slight chance of rain in the afternoon.",["Sunny","Rainy","Snowy","Cloudy"],0,"sunny"],
+  ["I'd like to book a table for two at seven o'clock this evening.",["Book a table","Order food","Pay bill","Call taxi"],0,"book a table"],
+  ["Could you please send me the report by Friday afternoon?",["Buy","Send","Read","Write"],1,"send"],
+  ["The meeting has been postponed until next Monday due to the storm.",["Cancelled","Postponed","Started","Finished"],1,"postponed"],
+  ["Our flight departs at 6:45 AM from Terminal 2, Gate 14.",["6:45 AM","7:45 AM","6:15 AM","14:00"],0,"6:45"],
+  ["She has been working as a software engineer for over five years.",["Doctor","Engineer","Teacher","Lawyer"],1,"engineer"],
+  ["The museum is closed on Mondays but open every other day from 9 to 6.",["Always open","Closed Mondays","Only Mondays","Closed weekends"],1,"closed Mondays"],
+  ["Please turn off your mobile phones during the presentation.",["Turn on","Turn off","Charge","Buy"],1,"turn off"],
+  ["Could you give me a discount if I buy two items?",["Yes","No","Maybe","Not sure"],0,"discount"],
+  ["The train leaves from platform 3 in ten minutes.",["Platform 1","Platform 2","Platform 3","Platform 4"],2,"platform 3"],
+  ["I'll pick you up at the airport at 3 PM tomorrow.",["Drop off","Pick up","Take out","Put on"],1,"pick up"],
+  ["The project deadline is next Friday, so we need to hurry.",["Next Friday","Next Monday","This Friday","Tomorrow"],0,"next Friday"],
+  ["Could you speak more slowly, please? I don't understand.",["Faster","Slower","Louder","Quieter"],1,"slower"],
+  ["I'm afraid I can't make it to the meeting tomorrow.",["Can attend","Cannot attend","Will be late","Will be early"],1,"can't make it"],
+  ["The restaurant is fully booked, but we can try another one nearby.",["Available","Fully booked","Closed","Empty"],1,"fully booked"]
+];
+
+/* ============ BOLALAR (20) ============ */
+var KIDS = [
+  ["🐱 What is this?",["A cat","A dog","A bird","A fish"],0],
+  ["🍎 What is this?",["A banana","An apple","An orange","A grape"],1],
+  ["🚗 What is this?",["A bus","A bike","A car","A train"],2],
+  ["☀️ What is this?",["The moon","A star","A cloud","The sun"],3],
+  ["How many legs does a dog have?",["Two","Three","Four","Six"],2],
+  ["The sky is ___.",["blue","red","green","pink"],0],
+  ["I ___ a boy.",["is","am","are","be"],1],
+  ["What do you say in the morning?",["Good night","Good morning","Goodbye","Sorry"],1],
+  ["1, 2, 3, ___, 5",["six","four","seven","two"],1],
+  ["🐘 What is this?",["A mouse","An elephant","A lion","A tiger"],1],
+  ["What color is grass?",["Blue","Green","Red","Yellow"],1],
+  ["How many days in a week?",["Five","Six","Seven","Eight"],2],
+  ["I have two ___.",["hand","hands","handes","hand's"],1],
+  ["🐟 Where does a fish live?",["Tree","Water","Land","Sky"],1],
+  ["What do you drink?",["Water","Bread","Chair","Book"],0],
+  ["The opposite of 'big' is ___.",["Tall","Small","Wide","Long"],1],
+  ["🐶 How many legs does a cat have?",["Two","Three","Four","Five"],2],
+  ["What color is the sun?",["Blue","Yellow","Green","Purple"],1],
+  ["The opposite of 'hot' is ___.",["Warm","Cold","Wet","Dry"],1],
+  ["What do you use to write?",["Fork","Pencil","Spoon","Cup"],1]
+];
+
+/* ============ BIZNES (15) ============ */
+var BUSINESS = [
+  ["Could you send me the ___ by Friday?",["report","reporter","reporting","reported"],0],
+  ["We need to ___ a meeting.",["make","hold","do","play"],1,"hold a meeting"],
+  ["Please find the document ___.",["attached","attaching","attach","attachment"],0],
+  ["I look forward to ___ from you.",["hear","hearing","heard","be hearing"],1,"+ -ing"],
+  ["The deadline has been ___.",["extended","extensed","extending","extend"],0],
+  ["Let's ___ the agenda.",["go over","go on","go out","go off"],0,"go over"],
+  ["Our profit ___ by 15%.",["raised","rose","risen","rised"],1,"rose"],
+  ["We should ___ a follow-up.",["schedule","scheduling","scheduled","schedules"],0],
+  ["The client has requested a ___.",["revise","revision","revising","revised"],1],
+  ["Please ___ the invoice.",["retain","retrain","retaliate","retract"],0],
+  ["Our team is ___ to results.",["commit","committed","committing","commitment"],1],
+  ["The proposal was turned ___.",["up","down","on","off"],1,"turn down"],
+  ["We need to ___ the budget.",["cut back on","cut off","cut out","cut in"],0,"cut back on"],
+  ["The CEO will ___ the new product.",["launch","lunch","lunched","launching"],0,"launch"],
+  ["Our ___ is to increase market share.",["goal","go","goes","going"],0,"goal"]
+];
+
+/* ============ FRAZAL FE'LLAR (20) ============ */
+var PHRASAL = [
+  ["I need to ___ my homework.",["hand in","hand out","hand over","hand down"],0,"hand in"],
+  ["The meeting was ___.",["put off","put on","put up","put down"],0,"put off"],
+  ["Can you ___ the word?",["look up","look after","look for","look into"],0,"look up"],
+  ["She ___ her mother.",["takes after","takes off","takes up","takes in"],0,"takes after"],
+  ["We should ___ the problem.",["look into","look up","look out","look over"],0,"look into"],
+  ["Don't forget to ___ the lights.",["turn off","turn on","turn up","turn down"],0,"turn off"],
+  ["He ___ smoking last year.",["gave up","gave in","gave out","gave away"],0,"gave up"],
+  ["I can't ___ what he means.",["figure out","figure in","figure on","figure up"],0,"figure out"],
+  ["The car ___ on the highway.",["broke down","broke up","broke out","broke in"],0,"broke down"],
+  ["We need to ___ this issue.",["deal with","deal in","deal out","deal up"],0,"deal with"],
+  ["She ___ the offer.",["turned down","turned up","turned on","turned off"],0,"turned down"],
+  ["Let's ___ the details.",["go over","go out","go on","go by"],0,"go over"],
+  ["He ___ a new hobby.",["took up","took off","took in","took out"],0,"took up"],
+    ["I'll ___ you ___ at the airport.",["pick up","drop off","put on","take off"],0,"pick up"],
+  ["The event was ___ due to rain.",["called off","called on","called up","called in"],0,"called off"],
+  ["Let's ___ this problem tomorrow.",["sort out","sort in","sort on","sort by"],0,"sort out"],
+  ["I need to ___ my room.",["tidy up","tidy on","tidy in","tidy out"],0,"tidy up"],
+  ["She ___ her grandmother.",["looks after","looks up","looks for","looks into"],0,"looks after"],
+  ["Please ___ the volume — it's too loud.",["turn down","turn up","turn on","turn off"],0,"turn down"]
+];
+
+/* ============ YOZISH (10) ============ */
+var WRITING = [
+  { title:"Mening kunim", prompt:"Write about your daily routine in 3-5 sentences.", hint:"I wake up at 7. I have breakfast..." },
+  { title:"Kechagi kun", prompt:"Write about what you did yesterday in 3-5 sentences.", hint:"Yesterday I went to..." },
+  { title:"Rejalar", prompt:"Write about your plans for next weekend in 3-5 sentences.", hint:"Next weekend I will..." },
+  { title:"Fikringiz", prompt:"Do you prefer working from home or office? Why? (3-5 sentences)", hint:"I prefer... because..." },
+  { title:"Sayohat", prompt:"Describe your dream vacation in 4-6 sentences.", hint:"I would like to visit..." },
+  { title:"Taom", prompt:"Describe your favorite dish and how to make it.", hint:"My favorite dish is..." },
+  { title:"Kitob", prompt:"Write about a book or movie that changed your thinking.", hint:"The book is called..." },
+  { title:"Kelajak", prompt:"Where do you see yourself in 5 years?", hint:"In five years, I hope..." },
+  { title:"Ta'til", prompt:"Describe your best holiday experience.", hint:"Last summer I went..." },
+  { title:"Do'st", prompt:"Describe your best friend and why they are special.", hint:"My best friend is..." }
+];
+
+/* ============ MASLAHATLAR (12) ============ */
+var TIPS = [
+  { icon:"🎯", title:"Aniq maqsad qo'ying", text:"Kuniga 15 daqiqa — haftada 3 soatdan ko'ra foydaliroq." },
+  { icon:"🔊", title:"Baland ovozda gapiring", text:"Yangi so'zlarni takrorlashda. Bu talaffuz va xotirani yaxshilaydi." },
+  { icon:"📖", title:"Har kuni o'qing", text:"Boshlang'ichda 5 daqiqa, o'rtada 20 daqiqa. Kitob yoki maqola." },
+  { icon:"🎧", title:"Tinglashni mashq qiling", text:"Podkastlar, YouTube, musiqa. Avval subtitr bilan, keyin subtitrsiz." },
+  { icon:"✍️", title:"Yozma mashqlar", text:"Kuniga 3-5 jumla yozing. Xato qilishdan qo'rqmang." },
+  { icon:"🗣️", title:"Suhbatdosh toping", text:"Tandem, HelloTalk yoki Telegram guruhlarida." },
+  { icon:"📱", title:"Telefonni inglizchaga o'zgartiring", text:"Kundalik interfeys ingliz tilida bo'lsa, beixtiyor o'rganasiz." },
+  { icon:"🔁", title:"Takrorlash — onasi", text:"Yangi so'zni 1, 3, 7 va 21-kuni takrorlang." },
+  { icon:"🎬", title:"Filmlarni inglizcha ko'ring", text:"Avval o'zbek subtitr, keyin ingliz, keyin subtitrsiz." },
+  { icon:"🏆", title:"O'zingizni mukofotlang", text:"Har hafta maqsadga erishganingizda o'zingizni mukofotlang." },
+  { icon:"📚", title:"Kitob o'qing", text:"Boshlang'ichda oddiy kitoblar, keyin asl nusxalar." },
+  { icon:"🌐", title:"Internetda inglizcha qidiring", text:"Google'da inglizcha qidiruv qiling. Natijalar ham inglizcha bo'ladi." }
+];
+
+/* ============ YUTUQLAR (20) ============ */
+var ACHIEVEMENTS = [
+  { id:"first", emoji:"🎉", title:"Birinchi qadam", desc:"Birinchi testni yakunlang" },
+  { id:"streak3", emoji:"🔥", title:"3 kun ketma-ket", desc:"3 kun mashq qiling" },
+  { id:"streak7", emoji:"💎", title:"Bir hafta", desc:"7 kun ketma-ket mashq" },
+  { id:"streak30", emoji:"👑", title:"Bir oy", desc:"30 kun ketma-ket mashq" },
+  { id:"perfect", emoji:"🌟", title:"Mukammal", desc:"100% natija oling" },
+  { id:"b1", emoji:"🦅", title:"B1 daraja", desc:"B1 darajaga chiqing" },
+  { id:"b2", emoji:"🦁", title:"B2 daraja", desc:"B2 darajaga chiqing" },
+  { id:"c1", emoji:"🦉", title:"C1 daraja", desc:"C1 darajaga chiqing" },
+  { id:"c2", emoji:"👑", title:"C2 daraja", desc:"C2 darajaga chiqing" },
+  { id:"grammar", emoji:"📘", title:"Grammatikachi", desc:"Grammatika bo'limini yakunlang" },
+  { id:"reader", emoji:"📚", title:"Kitobxon", desc:"O'qish bo'limini yakunlang" },
+  { id:"listener", emoji:"🎧", title:"Tinglovchi", desc:"Tinglash bo'limini yakunlang" },
+  { id:"writer", emoji:"✍️", title:"Yozuvchi", desc:"Yozish mashqini bajaring" },
+  { id:"speaker", emoji:"🗣️", title:"Notiq", desc:"Frazal fe'llarni tugatib chiqing" },
+  { id:"vocab50", emoji:"🎓", title:"50 so'z", desc:"50 so'zni o'rganing" },
+  { id:"vocab100", emoji:"📖", title:"100 so'z", desc:"Barcha so'zlarni o'rganing" },
+  { id:"allround", emoji:"🏆", title:"Hamma yoq", desc:"Barcha bo'limlarni sinab ko'ring" },
+  { id:"social", emoji:"📱", title:"Ijtimoiy", desc:"Natijani ulashing" },
+  { id:"master", emoji:"💯", title:"Usta", desc:"5 marta 100% oling" },
+  { id:"legend", emoji:"⚡", title:"Legenda", desc:"Barcha yutuqlarni oching" }
+];
+
+/* ============ KUNLIK ============ */
+var DAILY_WORDS = [
+  ["serendipity","tasodifan topilgan yaxshi narsa"],["resilience","qiyinchilikka chidamlilik"],
+  ["eloquent","notiq, ta'sirchan"],["pragmatic","amaliy, foydali"],
+  ["ambiguous","noaniq, ikki ma'noli"],["meticulous","juda sinchkov"],
+  ["pensive","o'ychan, xayolchan"],["ubiquitous","hamma joyda uchraydigan"],
+  ["tenacious","qat'iyatli"],["candid","ochiq, samimiy"],
+  ["nuance","nozik farq"],["paradigm","namuna, andoza"],
+  ["empathy","hamdardlik"],["diligent","mehnatkash"],
+  ["versatile","ko'p qirrali"],["innovative","innovatsion"],
+  ["articulate","aniq va tushunarli"],["profound","chuqur, teran"],
+  ["intricate","murakkab, nozik"],["notorious","yomon nom chiqargan"]
+];
+
+var DAILY_PHRASES = [
+  { en:"Break a leg!", uz:"Omad tilayman!" },
+  { en:"It's a piece of cake.", uz:"Bu juda oson." },
+  { en:"Let's call it a day.", uz:"Bugunlik tugatamiz." },
+  { en:"You're pulling my leg.", uz:"Meni aldayapsan." },
+  { en:"Hit the books.", uz:"Dars qilishga kirishmoq." },
+  { en:"Once in a blue moon.", uz:"Juda kamdan-kam." },
+  { en:"Under the weather.", uz:"Betob, tushkun." },
+  { en:"Speak of the devil.", uz:"O'zi haqida gap ketganda keldi." },
+  { en:"The ball is in your court.", uz:"Endi sizning navbatingiz." },
+  { en:"Bite the bullet.", uz:"Tishni tishga qo'yib chidash." },
+  { en:"Cost an arm and a leg.", uz:"Juda qimmat." },
+  { en:"Every cloud has a silver lining.", uz:"Har yomonda yaxshi tomon bor." },
+  { en:"Go the extra mile.", uz:"Kutilganidan ko'proq harakat." },
+  { en:"Burn the midnight oil.", uz:"Yarim kechagacha ishlamoq." },
+  { en:"The best of both worlds.", uz:"Ikki dunyoning eng yaxshisi." }
+];
+
+/* ============ RESURSLAR ============ */
+var RESOURCES = [
+  { icon:"📱", title:"Duolingo", desc:"Boshlang'ich uchun bepul", url:"https://duolingo.com" },
+  { icon:"🎧", title:"BBC Learning English", desc:"Podkastlar va mashqlar", url:"https://bbc.co.uk/learningenglish" },
+  { icon:"📚", title:"British Council", desc:"Bepul kurslar", url:"https://learnenglish.britishcouncil.org" },
+  { icon:"🎬", title:"TED Talks", desc:"Ma'ruzalar, subtitrli", url:"https://ted.com/talks" },
+  { icon:"📖", title:"Cambridge Dictionary", desc:"Ishonchli lug'at", url:"https://dictionary.cambridge.org" },
+  { icon:"🗣️", title:"HelloTalk", desc:"Chet elliklar bilan suhbat", url:"https://hellotalk.com" }
+];
+
+/* ============ HAFTA REJASI ============ */
+var WEEK_PLAN = [
+  { day:"Du", icon:"📘", task:"Grammatika: 10 mashq", min:15 },
+  { day:"Se", icon:"📖", task:"Lug'at: 20 so'z", min:15 },
+  { day:"Ch", icon:"🎧", task:"Tinglash: 1 podkast", min:20 },
+  { day:"Pa", icon:"📚", task:"O'qish: 1 matn", min:20 },
+  { day:"Ju", icon:"✍️", task:"Yozish: 5 jumla", min:15 },
+  { day:"Sh", icon:"🃏", task:"Kartochkalar", min:15 },
+  { day:"Ya", icon:"🎯", task:"Daraja testi", min:15 }
+];
+
+/* ============ MENYU ============ */
+var MENU = [
+  ["home","🏠 Asosiy"],
+  ["level","🎯 Test"],
+  ["rate","🏆 Reyting"],
+  ["grammar","📘 Grammatika"],
+  ["vocab","📖 Lug'at"],
+  ["read","📚 O'qish"],
+  ["listen","🎧 Tinglash"],
+  ["phrase","🔗 Frazal"],
+  ["kids","🧒 Bolalar"],
+  ["biz","💼 Biznes"],
+  ["write","✍️ Yozish"],
+  ["cards","🃏 Kartochkalar"],
+  ["tips","💡 Maslahatlar"],
+  ["achv","🏅 Yutuqlar"],
+  ["stats","📊 Statistika"],
+  ["profile","👤 Profil"]
+];
+
+/* ============ MODES ============ */
+var MODES = [
+  { key:"level", icon:"🎯", cls:"grad-1", title:"Daraja testi", desc:"30 savol, A1 dan C2 gacha.", tag:"Hamma uchun" },
+  { key:"grammar", icon:"📘", cls:"grad-4", title:"Grammatika", desc:"30 izohli mashq.", tag:"Maktab" },
+  { key:"vocab", icon:"📖", cls:"grad-3", title:"Lug'at", desc:"80 so'z. Ma'nosini toping.", tag:"Boshlovchilar" },
+  { key:"read", icon:"📚", cls:"grad-2", title:"O'qish", desc:"6 matn + savollar.", tag:"IELTS" },
+  { key:"listen", icon:"🎧", cls:"grad-4", title:"Tinglash", desc:"15 ovozli savol.", tag:"Barcha" },
+  { key:"phrase", icon:"🔗", cls:"grad-2", title:"Frazal fe'llar", desc:"20 eng ko'p ishlatiladigan.", tag:"O'rta" },
+  { key:"kids", icon:"🧒", cls:"grad-3", title:"Bolalar", desc:"20 rasmli savol.", tag:"6-12 yosh" },
+  { key:"biz", icon:"💼", cls:"grad-1", title:"Biznes", desc:"15 ish savoli.", tag:"Xodimlar" },
+  { key:"write", icon:"✍️", cls:"grad-4", title:"Yozish", desc:"10 topshiriq, saqlanadi.", tag:"Barcha" },
+  { key:"cards", icon:"🃏", cls:"grad-3", title:"Kartochkalar", desc:"80 so'zni yodlang.", tag:"Hamma" },
+  { key:"tips", icon:"💡", cls:"grad-2", title:"Maslahatlar", desc:"12 oltin qoida.", tag:"Motivatsiya" },
+  { key:"achv", icon:"🏅", cls:"grad-4", title:"Yutuqlar", desc:"20 ta yutuq.", tag:"Motivatsiya" },
+  { key:"stats", icon:"📊", cls:"grad-1", title:"Statistika", desc:"Natijalar va o'sish.", tag:"Hamma" }
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+var root = document.getElementById("root");
+var toastEl = document.getElementById("toast");
+var modalEl = document.getElementById("modal");
+var modalInner = document.getElementById("modalInner");
+var confettiEl = document.getElementById("confetti");
+
+var S = null, P = null, C = null, timerInterval = null;
+var CURRENT_USER = null;
+
+/* ============ HELPERS ============ */
+function $(s){ return document.querySelector(s); }
+function $$(s){ return document.querySelectorAll(s); }
+function esc(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+function shuffle(a){
+  a = a.slice();
+  for(var i = a.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function todayISO(){ return new Date().toISOString().slice(0,10); }
+function today(){ return new Date().toDateString(); }
+function uid(){ return "u_" + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+
+function toast(msg, type){
+  toastEl.textContent = msg;
+  toastEl.className = "toast on" + (type ? " " + type : "");
+  clearTimeout(toastEl._t);
+  toastEl._t = setTimeout(function(){ toastEl.classList.remove("on"); }, 2400);
+}
+
+function openModal(html){
+  modalInner.innerHTML = html;
+  modalEl.classList.add("on");
+}
+function closeModal(){ modalEl.classList.remove("on"); }
+modalEl.onclick = function(e){ if(e.target === modalEl) closeModal(); };
+window.closeModal = closeModal;
+
+function speak(text){
+  if(!("speechSynthesis" in window)){ toast("Ovoz yo'q"); return; }
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-US"; u.rate = 0.9;
+  window.speechSynthesis.speak(u);
+}
+window.speakText = speak;
+
+function confetti(count){
+  count = count || 50;
+  var colors = ["#8b5cf6","#6366f1","#3b82f6","#ec4899","#f59e0b","#10b981"];
+  confettiEl.innerHTML = "";
+  for(var i = 0; i < count; i++){
+    var el = document.createElement("i");
+    el.style.left = Math.random() * 100 + "%";
+    el.style.top = "-20px";
+    el.style.width = (6 + Math.random() * 10) + "px";
+    el.style.height = (6 + Math.random() * 10) + "px";
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.animationDelay = (Math.random() * 0.6) + "s";
+    el.style.animationDuration = (2 + Math.random() * 2) + "s";
+    el.style.borderRadius = Math.random() > 0.5 ? "50%" : "3px";
+    confettiEl.appendChild(el);
+  }
+  setTimeout(function(){ confettiEl.innerHTML = ""; }, 5000);
+}
+
+/* ============ USERS DATABASE ============ */
+var Users = {
+  KEY: "pogona_users",
+  CURRENT: "pogona_current_user",
+  all: function(){
+    try{
+      var raw = localStorage.getItem(this.KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){ return []; }
+  },
+  save: function(list){
+    try{ localStorage.setItem(this.KEY, JSON.stringify(list)); }catch(e){}
+  },
+  find: function(id){
+    var all = this.all();
+    for(var i = 0; i < all.length; i++){
+      if(all[i].id === id) return all[i];
+    }
+    return null;
+  },
+  findByEmail: function(email){
+    var all = this.all();
+    email = (email || "").toLowerCase().trim();
+    for(var i = 0; i < all.length; i++){
+      if(all[i].email === email) return all[i];
+    }
+    return null;
+  },
+  create: function(name, email, avatar){
+    var user = {
+      id: uid(),
+      name: name.trim(),
+      email: (email || "").toLowerCase().trim(),
+      avatar: avatar || "🦊",
+      createdAt: Date.now(),
+      stats: {
+        xp: 0, tests: 0, best: 0, totalCorrect: 0, totalAnswers: 0,
+        streak: { days:0, last:"", best:0, calendar:[] },
+        achievements: [],
+        cards: {},
+        writing: {},
+        visited: [],
+        history: [],
+        wrong: [],
+        dailyBonus: ""
+      }
+    };
+    var all = this.all();
+    all.push(user);
+    this.save(all);
+    return user;
+  },
+  update: function(user){
+    var all = this.all();
+    for(var i = 0; i < all.length; i++){
+      if(all[i].id === user.id){
+        all[i] = user;
+        this.save(all);
+        return;
+      }
+    }
+    all.push(user);
+    this.save(all);
+  },
+  setCurrent: function(id){
+    try{ localStorage.setItem(this.CURRENT, id); }catch(e){}
+  },
+  getCurrentId: function(){
+    try{ return localStorage.getItem(this.CURRENT); }catch(e){ return null; }
+  },
+  logout: function(){
+    try{ localStorage.removeItem(this.CURRENT); }catch(e){}
+  },
+  ranking: function(){
+    var all = this.all();
+    return all.slice().sort(function(a, b){
+      return (b.stats.xp || 0) - (a.stats.xp || 0);
+    });
+  }
+};
+
+/* ============ STORE (joriy foydalanuvchi uchun) ============ */
+var store = {
+  get: function(){
+    if(!CURRENT_USER) return null;
+    var fresh = Users.find(CURRENT_USER.id);
+    if(fresh) CURRENT_USER = fresh;
+    return CURRENT_USER.stats;
+  },
+  save: function(){
+    if(!CURRENT_USER) return;
+    Users.update(CURRENT_USER);
+  },
+  add: function(r){
+    var d = this.get();
+    if(!d) return;
+    d.history.unshift(r);
+    d.history = d.history.slice(0, 50);
+    d.tests = (d.tests || 0) + 1;
+    /* XP: har to'g'ri javob = 10 XP */
+    this.save();
+  },
+  addXP: function(amount){
+    var d = this.get();
+    if(!d) return;
+    d.xp = (d.xp || 0) + amount;
+    this.save();
+    return d.xp;
+  },
+  addWrong: function(item){
+    var d = this.get();
+    if(!d) return;
+    var exists = d.wrong.some(function(w){ return w.t === item.t; });
+    if(!exists){
+      d.wrong.unshift({ t:item.t, correct:item.correct, chosen:item.chosen, date: todayISO() });
+      d.wrong = d.wrong.slice(0, 100);
+      this.save();
+    }
+  },
+  clearWrong: function(){
+    var d = this.get();
+    if(!d) return;
+    d.wrong = [];
+    this.save();
+  },
+  updateStreak: function(){
+    var d = this.get();
+    if(!d) return null;
+    var t = today();
+    if(d.streak.last === t) return d.streak;
+    var y = new Date(Date.now() - 86400000).toDateString();
+    d.streak.days = (d.streak.last === y) ? d.streak.days + 1 : 1;
+    d.streak.last = t;
+    if(d.streak.days > d.streak.best) d.streak.best = d.streak.days;
+    var iso = todayISO();
+    if(d.streak.calendar.indexOf(iso) === -1) d.streak.calendar.push(iso);
+    if(d.streak.calendar.length > 60) d.streak.calendar = d.streak.calendar.slice(-60);
+    this.save();
+    return d.streak;
+  },
+  saveCard: function(word){
+    var d = this.get();
+    if(!d) return;
+    d.cards[word] = (d.cards[word] || 0) + 1;
+    this.save();
+  },
+  saveWriting: function(title, text){
+    var d = this.get();
+    if(!d) return;
+    d.writing[title] = text;
+    this.save();
+  },
+  addVisited: function(m){
+    var d = this.get();
+    if(!d) return;
+    if(d.visited.indexOf(m) === -1){
+      d.visited.push(m);
+      this.save();
+    }
+  },
+  canClaimBonus: function(){
+    var d = this.get();
+    if(!d) return false;
+    return d.dailyBonus !== todayISO();
+  },
+  claimBonus: function(){
+    var d = this.get();
+    if(!d) return;
+    d.dailyBonus = todayISO();
+    this.save();
+  }
+};
+
+/* ============ ACHIEVEMENTS ============ */
+var achv = {
+  unlock: function(id){
+    var d = store.get();
+    if(!d) return false;
+    if(d.achievements.indexOf(id) !== -1) return false;
+    d.achievements.push(id);
+    store.save();
+    var a = ACHIEVEMENTS.filter(function(x){ return x.id === id; })[0];
+    if(a){
+      setTimeout(function(){
+        openModal(
+          '<span class="modal-emoji">' + a.emoji + '</span>' +
+          '<h2 style="font-size:24px;margin-bottom:8px">🎉 Yangi yutuq!</h2>' +
+          '<p style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;font-size:18px;margin-bottom:8px">' + esc(a.title) + '</p>' +
+          '<p style="color:var(--text-2);margin-bottom:24px;font-size:14px">' + esc(a.desc) + '</p>' +
+          '<button class="btn primary" onclick="window.closeModal()">Davom etish →</button>'
+        );
+        confetti(40);
+      }, 400);
+    }
+    return true;
+  },
+  check: function(){
+    var d = store.get();
+    if(!d) return;
+    var self = this;
+    if(d.history.length >= 1) self.unlock("first");
+    if(d.streak.days >= 3) self.unlock("streak3");
+    if(d.streak.days >= 7) self.unlock("streak7");
+    if(d.streak.days >= 30) self.unlock("streak30");
+    if(d.history.some(function(h){ return h.p === 100; })) self.unlock("perfect");
+    if(d.history.some(function(h){ return h.l === "B1"; })) self.unlock("b1");
+    if(d.history.some(function(h){ return h.l === "B2"; })) self.unlock("b2");
+    if(d.history.some(function(h){ return h.l === "C1"; })) self.unlock("c1");
+    if(d.history.some(function(h){ return h.l === "C2"; })) self.unlock("c2");
+    if(d.visited.indexOf("grammar") !== -1) self.unlock("grammar");
+    if(d.visited.indexOf("read") !== -1) self.unlock("reader");
+    if(d.visited.indexOf("listen") !== -1) self.unlock("listener");
+    if(d.visited.indexOf("write") !== -1) self.unlock("writer");
+    if(d.visited.indexOf("phrase") !== -1) self.unlock("speaker");
+    var known = Object.keys(d.cards).filter(function(k){ return d.cards[k] > 0; }).length;
+    if(known >= 50) self.unlock("vocab50");
+    if(known >= 80) self.unlock("vocab100");
+    var needed = ["level","grammar","vocab","read","listen","phrase","kids","biz","write","cards"];
+    if(needed.every(function(m){ return d.visited.indexOf(m) !== -1; })) self.unlock("allround");
+    var perfects = d.history.filter(function(h){ return h.p === 100; }).length;
+    if(perfects >= 5) self.unlock("master");
+    if(d.achievements.length >= ACHIEVEMENTS.length - 1) self.unlock("legend");
+  }
+};
+  /* ============================================================
+   LOGIN TIZIMI
+   ============================================================ */
+var AVATARS = ["🦊","🐱","🐶","🦁","🐯","🐼","🐨","🐸","🦉","🦅","🐺","🐴"];
+
+function renderLogin(){
+  var html = '<div class="login-screen">';
+  html += '<div class="login-card">';
+  html += '<div class="login-logo">P</div>';
+  html += '<h1>Xush kelibsiz!</h1>';
+  html += '<p class="subtitle">Ismingizni kiriting va reytingda qatnashing</p>';
+
+  html += '<div class="form-group">';
+  html += '<label class="form-label">Ismingiz</label>';
+  html += '<input type="text" class="form-input" id="loginName" placeholder="Masalan: Muhammadamin" maxlength="20" autocomplete="name">';
+  html += '</div>';
+
+  html += '<div class="form-group">';
+  html += '<label class="form-label">Email (ixtiyoriy)</label>';
+  html += '<input type="email" class="form-input" id="loginEmail" placeholder="siz@example.com" autocomplete="email">';
+  html += '</div>';
+
+  html += '<div class="form-group">';
+  html += '<label class="form-label">Avatarni tanlang</label>';
+  html += '<div class="avatar-picker" id="avatarPicker">';
+  AVATARS.forEach(function(a, i){
+    html += '<button class="avatar-opt' + (i === 0 ? " sel" : "") + '" data-a="' + a + '">' + a + '</button>';
+  });
+  html += '</div>';
+  html += '</div>';
+
+  html += '<button class="btn primary lg" id="loginBtn" style="width:100%">Boshlash 🚀</button>';
+  html += '<p style="text-align:center;font-size:12px;color:var(--muted);margin-top:16px">Ma\'lumotlar faqat sizning qurilmangizda saqlanadi</p>';
+  html += '</div>';
+  html += '</div>';
+  root.innerHTML = html;
+
+  var selectedAvatar = AVATARS[0];
+  $$("#avatarPicker .avatar-opt").forEach(function(b){
+    b.onclick = function(){
+      $$("#avatarPicker .avatar-opt").forEach(function(x){ x.classList.remove("sel"); });
+      b.classList.add("sel");
+      selectedAvatar = b.dataset.a;
+    };
+  });
+
+  var nameInput = $("#loginName");
+  nameInput.focus();
+
+  function doLogin(){
+    var name = nameInput.value.trim();
+    if(name.length < 2){
+      toast("Ism kamida 2 harfdan iborat bo'lishi kerak", "error");
+      nameInput.focus();
+      return;
+    }
+    var email = $("#loginEmail").value.trim();
+    /* Email tekshirish: agar email kiritilgan bo'lsa va mavjud bo'lsa — login qilamiz */
+    if(email){
+      var existing = Users.findByEmail(email);
+      if(existing){
+        Users.setCurrent(existing.id);
+        CURRENT_USER = existing;
+        toast("Xush kelibsiz, " + existing.name + "! 👋", "success");
+        initApp();
+        return;
+      }
+    }
+    /* Yangi foydalanuvchi yaratish */
+    var user = Users.create(name, email, selectedAvatar);
+    Users.setCurrent(user.id);
+    CURRENT_USER = user;
+    toast("Xush kelibsiz, " + name + "! 🎉", "success");
+    confetti(40);
+    initApp();
+  }
+
+  $("#loginBtn").onclick = doLogin;
+  nameInput.onkeydown = function(e){ if(e.key === "Enter") doLogin(); };
+  $("#loginEmail").onkeydown = function(e){ if(e.key === "Enter") doLogin(); };
+}
+
+/* ============================================================
+   ASOSIY ILOVA
+   ============================================================ */
+function initApp(){
+  if(!CURRENT_USER){
+    var id = Users.getCurrentId();
+    if(id) CURRENT_USER = Users.find(id);
+  }
+  if(!CURRENT_USER){
+    renderLogin();
+    return;
+  }
+
+  /* Header + Nav + Main */
+  var html = '';
+  html += '<header class="header">';
+  html += '  <div class="header-inner">';
+  html += '    <div class="brand" onclick="window.go(\'home\')">';
+  html += '      <div class="brand-mark">P</div>';
+  html += '      <span>pog\'ona</span>';
+  html += '    </div>';
+  html += '    <div class="header-actions">';
+  html += '      <button class="icon-btn" id="streakBtn" title="Kunlik seriya">';
+  html += '        <span id="streakNum">0</span>🔥';
+  html += '      </button>';
+  html += '      <button class="icon-btn" id="themeBtn" title="Mavzu">🌓</button>';
+  html += '      <button class="user-chip" onclick="window.go(\'profile\')">';
+  html += '        <div class="user-avatar">' + esc(CURRENT_USER.avatar) + '</div>';
+  html += '        <span style="max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(CURRENT_USER.name) + '</span>';
+  html += '      </button>';
+  html += '    </div>';
+  html += '  </div>';
+  html += '  <div class="nav-wrap">';
+  html += '    <nav class="nav" id="nav"></nav>';
+  html += '  </div>';
+  html += '</header>';
+  html += '<main class="main" id="app"></main>';
+  html += '<footer class="footer">';
+  html += '  <div class="footer-inner">';
+  html += '    <div>';
+  html += '      <div style="display:flex;align-items:center;gap:8px;font-family:\'Bricolage Grotesque\',sans-serif;font-weight:800;font-size:16px;margin-bottom:4px">';
+  html += '        <div style="width:28px;height:28px;border-radius:8px;background:var(--grad);display:grid;place-items:center;color:#fff;font-size:14px">P</div>';
+  html += '        pog\'ona';
+  html += '      </div>';
+  html += '      <p>Ingliz tilini o\'rganish platformasi</p>';
+  html += '    </div>';
+  html += '    <div class="footer-links">';
+  html += '      <a href="https://t.me/Muhammad1y_20" target="_blank" rel="noopener">✈️ Telegram</a>';
+  html += '      <a href="https://instagram.com/kamoliddinov._010" target="_blank" rel="noopener">📷 Instagram</a>';
+  html += '    </div>';
+  html += '    <p class="footer-copy">© 2026 Muhammadamin</p>';
+  html += '  </div>';
+  html += '</footer>';
+  root.innerHTML = html;
+
+  /* Nav */
+  var navEl = document.getElementById("nav");
+  navEl.innerHTML = MENU.map(function(m){
+    return '<button data-k="' + m[0] + '">' + esc(m[1]) + '</button>';
+  }).join("");
+  navEl.onclick = function(e){
+    var b = e.target.closest("button");
+    if(b) window.go(b.dataset.k);
+  };
+
+  /* Theme */
+  document.getElementById("themeBtn").onclick = function(){
+    var r = document.documentElement;
+    var isDark = r.dataset.theme ? r.dataset.theme === "dark"
+      : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    r.dataset.theme = isDark ? "light" : "dark";
+    try{ localStorage.setItem("pogona_theme", r.dataset.theme); }catch(e){}
+  };
+  try{
+    var savedTheme = localStorage.getItem("pogona_theme");
+    if(savedTheme) document.documentElement.dataset.theme = savedTheme;
+  }catch(e){}
+
+  updateStreakDisplay();
+  window.go("home");
+}
+
+function setNav(k){
+  $$("#nav button").forEach(function(b){
+    b.classList.toggle("on", b.dataset.k === k);
+  });
+}
+
+function updateStreakDisplay(){
+  var d = store.get();
+  var el = document.getElementById("streakNum");
+  if(el && d) el.textContent = d.streak.days;
+}
+
+/* ============ ROUTER ============ */
+function go(k){
+  stopTimer();
+  setNav(k);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  store.addVisited(k);
+  achv.check();
+
+  if(k === "home") home();
+  else if(k === "level") startLevelTest();
+  else if(k === "rate") renderRating();
+  else if(k === "cards") startCards();
+  else if(k === "stats") renderStats();
+  else if(k === "achv") renderAchv();
+  else if(k === "tips") renderTips();
+  else if(k === "write") startWriting();
+  else if(k === "listen") startListening();
+  else if(k === "profile") renderProfile();
+  else startPractice(k);
+}
+window.go = go;
+
+/* ============================================================
+   HOME
+   ============================================================ */
+function home(){
+  var d = store.get();
+  if(!d){ renderLogin(); return; }
+  var dailyWord = DAILY_WORDS[new Date().getDate() % DAILY_WORDS.length];
+  var dailyPhrase = DAILY_PHRASES[new Date().getDate() % DAILY_PHRASES.length];
+  var rank = Users.ranking().findIndex(function(u){ return u.id === CURRENT_USER.id; }) + 1;
+
+  var html = '';
+  html += '<section class="hero"><div>';
+  html += '  <div class="hero-badge"><span class="dot"></span> Salom, ' + esc(CURRENT_USER.name.split(" ")[0]) + '! · Reyting: #' + rank + '</div>';
+  html += '  <h1>Ingliz tilingizni <em>professional darajada</em> o\'rganing</h1>';
+  html += '  <p>30 savol, 6 daraja — A1 dan C2 gacha. Grammatika, lug\'at, tinglash va boshqalar bir joyda.</p>';
+  html += '  <div class="hero-actions">';
+  html += '    <button class="btn primary lg" onclick="go(\'level\')">🚀 Testni boshlash</button>';
+  html += '    <button class="btn lg" onclick="go(\'rate\')">🏆 Reyting</button>';
+  html += '  </div>';
+  html += '  <div class="hero-stats">';
+  html += '    <div class="hero-stat"><b>' + (d.xp || 0) + '</b><span>XP BALL</span></div>';
+  html += '    <div class="hero-stat"><b>' + (d.tests || 0) + '</b><span>TESTLAR</span></div>';
+  html += '    <div class="hero-stat"><b>' + d.streak.days + '🔥</b><span>SERIYA</span></div>';
+  html += '    <div class="hero-stat"><b>#' + rank + '</b><span>REYTING</span></div>';
+  html += '  </div>';
+  html += '</div><div class="stairs">';
+  LEVELS.forEach(function(l, i){
+    html += '<div class="step" style="height:' + (30 + i * 14) + '%" onclick="go(\'level\')" title="' + esc(LEVEL_INFO[l].name) + '">';
+    html +=   '<b>' + l + '</b><span>' + esc(LEVEL_INFO[l].name) + '</span>';
+    html += '</div>';
+  });
+  html += '</div></section>';
+
+  /* Daily bonus */
+  if(store.canClaimBonus()){
+    html += '<section class="section"><div class="daily">';
+    html += '  <div><h2>🎁 Kunlik bonus!</h2>';
+    html += '  <p>Har kuni kirganingiz uchun +50 XP. Motivatsiyangizni saqlang!</p>';
+    html += '  <button class="btn lg" onclick="window.claimBonus()">+50 XP olish 🎉</button></div>';
+    html += '  <div class="daily-content">';
+    html += '    <div class="daily-box"><div class="daily-box-label">BUGUNGI SO\'Z</div>';
+    html += '      <div class="daily-box-word">' + esc(dailyWord[0]) + '</div>';
+    html += '      <div class="daily-box-trans">' + esc(dailyWord[1]) + '</div></div>';
+    html += '    <div class="daily-box"><div class="daily-box-label">BUGUNGI IBORA</div>';
+    html += '      <div class="daily-box-word">' + esc(dailyPhrase.en) + '</div>';
+    html += '      <div class="daily-box-trans">' + esc(dailyPhrase.uz) + '</div></div>';
+    html += '  </div>';
+    html += '</div></section>';
+  }
+
+  /* Top 3 leaderboard */
+  var top3 = Users.ranking().slice(0, 3);
+  if(top3.length >= 1){
+    html += '<section class="section">';
+    html += '  <div class="section-head"><h2>🏆 Top 3</h2>';
+    html += '  <p><a href="#" onclick="event.preventDefault();go(\'rate\')" style="color:var(--primary);font-weight:700">To\'liq reyting →</a></p></div>';
+    html += '  <div class="leaderboard">';
+    top3.forEach(function(u, i){
+      var medalClass = i === 0 ? "gold" : i === 1 ? "silver" : "bronze";
+      var medal = i === 0 ? "🥇" : i === 1 ? "🥈" : "🥉";
+      var me = u.id === CURRENT_USER.id ? " me" : "";
+      html += '<div class="lb-row' + me + '">';
+      html += '  <div class="lb-rank ' + medalClass + '">' + medal + '</div>';
+      html += '  <div class="lb-user">';
+      html += '    <div class="lb-avatar">' + esc(u.avatar) + '</div>';
+      html += '    <div class="lb-name">' + esc(u.name) + '<small>' + (u.stats.tests || 0) + ' test · ' + (u.stats.streak ? u.stats.streak.days : 0) + ' kun seriya</small></div>';
+      html += '  </div>';
+      html += '  <div class="lb-score"><b>' + (u.stats.xp || 0) + '</b><span>XP</span></div>';
+      html += '</div>';
+    });
+    html += '  </div>';
+    html += '</section>';
+  }
+
+  /* Modes */
+  html += '<section class="section">';
+  html += '  <div class="section-head"><h2>Nimadan boshlaymiz?</h2>';
+  html += '  <p>13 ta bo\'lim — har biri alohida ko\'nikma.</p></div>';
+  html += '  <div class="grid">';
+  MODES.forEach(function(m){
+    html += '<div class="card hoverable" onclick="go(\'' + m.key + '\')">';
+    html += '  <div class="card-icon ' + m.cls + '">' + m.icon + '</div>';
+    html += '  <h3>' + esc(m.title) + '</h3>';
+    html += '  <p>' + esc(m.desc) + '</p>';
+    html += '  <span class="tag">' + esc(m.tag) + '</span>';
+    html += '</div>';
+  });
+  html += '  </div>';
+  html += '</section>';
+
+  /* Week Plan */
+  html += '<section class="section">';
+  html += '  <div class="section-head"><h2>📆 Haftalik reja</h2>';
+  html += '  <p>Kuniga 15-20 daqiqa — natija kafolatli.</p></div>';
+  html += '  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">';
+  var todayIdx = new Date().getDay();
+  var map = {1:0,2:1,3:2,4:3,5:4,6:5,0:6};
+  var td = map[todayIdx];
+  WEEK_PLAN.forEach(function(w, i){
+    var isToday = i === td;
+    html += '<div class="card"' + (isToday ? ' style="border-color:var(--primary);background:linear-gradient(180deg,rgba(139,92,246,.1),var(--panel))"' : '') + '>';
+    html += '  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+    html += '    <b style="font-size:16px">' + w.day + '</b>';
+    html += '    <span style="font-size:22px">' + w.icon + '</span>';
+    html += '  </div>';
+    html += '  <p style="font-weight:700;color:var(--text);font-size:13px;margin-bottom:8px">' + esc(w.task) + '</p>';
+    html += '  <span class="tag">' + w.min + ' daq</span>';
+    html += '</div>';
+  });
+  html += '  </div>';
+  html += '</section>';
+
+  /* History */
+  if(d.history && d.history.length){
+    html += '<section class="section">';
+    html += '  <div class="section-head"><h2>Oxirgi natijalar</h2>';
+    html += '  <p><a href="#" onclick="event.preventDefault();go(\'stats\')" style="color:var(--primary);font-weight:700">Barchasi →</a></p></div>';
+    html += '  <div class="hist">';
+    d.history.slice(0, 8).forEach(function(h){
+      html += '<div class="hist-item"><b>' + esc(h.l) + '</b> · ' + h.p + '% · ' + esc(h.date) + '</div>';
+    });
+    html += '  </div>';
+    html += '</section>';
+  }
+
+  /* Resources */
+  html += '<section class="section">';
+  html += '  <div class="section-head"><h2>🔗 Foydali resurslar</h2><p>Tekshirilgan va bepul.</p></div>';
+  html += '  <div class="grid">';
+  RESOURCES.forEach(function(r){
+    html += '<a href="' + r.url + '" target="_blank" rel="noopener" class="card hoverable">';
+    html += '  <div class="card-icon grad-1">' + r.icon + '</div>';
+    html += '  <h3>' + esc(r.title) + '</h3>';
+    html += '  <p>' + esc(r.desc) + '</p>';
+    html += '</a>';
+  });
+  html += '  </div>';
+  html += '</section>';
+
+  document.getElementById("app").innerHTML = html;
+}
+
+window.claimBonus = function(){
+  if(!store.canClaimBonus()) return;
+  store.claimBonus();
+  store.addXP(50);
+  store.updateStreak();
+  confetti(60);
+  updateStreakDisplay();
+  toast("🎉 +50 XP!", "success");
+  setTimeout(function(){ home(); }, 100);
+};
+
+/* ============================================================
+   REYTING
+   ============================================================ */
+function renderRating(){
+  var users = Users.ranking();
+  var myRank = users.findIndex(function(u){ return u.id === CURRENT_USER.id; }) + 1;
+  var me = CURRENT_USER;
+
+  var html = '<section class="section">';
+  html += '<div class="section-head"><h2>🏆 Global reyting</h2>';
+  html += '<p>XP ballari bo\'yicha barcha foydalanuvchilar.</p></div>';
+
+  /* My rank */
+  html += '<div class="card" style="margin-bottom:24px;background:linear-gradient(135deg,rgba(139,92,246,.15),var(--panel));border-color:var(--primary)">';
+  html += '  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">';
+  html += '    <div class="user-avatar" style="width:52px;height:52px;font-size:24px">' + esc(me.avatar) + '</div>';
+  html += '    <div style="flex:1;min-width:120px">';
+  html += '      <h3 style="font-size:20px;margin-bottom:4px">Sizning o\'rningiz: #' + myRank + '</h3>';
+  html += '      <p style="color:var(--text-2);font-size:13px">' + (me.stats.xp || 0) + ' XP · ' + (me.stats.tests || 0) + ' test</p>';
+  html += '    </div>';
+  html += '    <div style="text-align:right">';
+  html += '      <b style="font:800 28px \'Bricolage Grotesque\',sans-serif;color:var(--primary)">' + (me.stats.xp || 0) + '</b>';
+  html += '      <div style="font-size:11px;color:var(--muted);font-weight:700">XP</div>';
+  html += '    </div>';
+  html += '  </div>';
+  html += '</div>';
+
+  /* Full list */
+  html += '<div class="leaderboard">';
+  if(users.length === 0){
+    html += '<p style="color:var(--text-2);text-align:center;padding:40px 0">Hali foydalanuvchilar yo\'q.</p>';
+  } else {
+    users.forEach(function(u, i){
+      var medalClass = i === 0 ? "gold" : i === 1 ? "silver" : i === 2 ? "bronze" : "";
+      var medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : (i + 1);
+      var meClass = u.id === CURRENT_USER.id ? " me" : "";
+      html += '<div class="lb-row' + meClass + '">';
+      html += '  <div class="lb-rank ' + medalClass + '">' + medal + '</div>';
+      html += '  <div class="lb-user">';
+      html += '    <div class="lb-avatar">' + esc(u.avatar) + '</div>';
+      html += '    <div class="lb-name">' + esc(u.name) + (u.id === CURRENT_USER.id ? ' <span style="color:var(--primary);font-size:11px">(siz)</span>' : '') + '<small>' + (u.stats.tests || 0) + ' test · ' + (u.stats.streak ? u.stats.streak.days : 0) + '🔥 · Eng yaxshi: ' + (u.stats.best || 0) + '%</small></div>';
+      html += '  </div>';
+      html += '  <div class="lb-score"><b>' + (u.stats.xp || 0) + '</b><span>XP</span></div>';
+      html += '</div>';
+    });
+  }
+  html += '</div>';
+  html += '</section>';
+
+  document.getElementById("app").innerHTML = html;
+}
+
+/* ============================================================
+   PROFIL
+   ============================================================ */
+function renderProfile(){
+  var d = store.get();
+  var users = Users.ranking();
+  var myRank = users.findIndex(function(u){ return u.id === CURRENT_USER.id; }) + 1;
+  var avg = 0;
+  if(d.history.length){
+    avg = Math.round(d.history.reduce(function(a, h){ return a + h.p; }, 0) / d.history.length);
+  }
+
+  var html = '<section class="section">';
+  html += '<div class="profile-head">';
+  html += '  <div class="profile-avatar">' + esc(CURRENT_USER.avatar) + '</div>';
+  html += '  <div class="profile-info">';
+  html += '    <h2>' + esc(CURRENT_USER.name) + '</h2>';
+  html += '    <p>' + (CURRENT_USER.email ? esc(CURRENT_USER.email) : "Email kiritilmagan") + '</p>';
+  html += '    <p style="margin-top:6px;color:var(--primary);font-weight:700">Reyting: #' + myRank + ' / ' + users.length + '</p>';
+  html += '  </div>';
+  html += '  <button class="btn" onclick="window.logout()">Chiqish</button>';
+  html += '</div>';
+
+  html += '<div class="stat-grid">';
+  html += '  <div class="stat-box"><b>' + (d.xp || 0) + '</b><span>XP BALL</span></div>';
+  html += '  <div class="stat-box"><b>' + (d.tests || 0) + '</b><span>TESTLAR</span></div>';
+  html += '  <div class="stat-box"><b>' + d.streak.days + '🔥</b><span>SERIYA</span></div>';
+  html += '  <div class="stat-box"><b>' + avg + '%</b><span>O\'RTACHA</span></div>';
+  html += '  <div class="stat-box"><b>' + (d.achievements.length) + '</b><span>YUTUQLAR</span></div>';
+  html += '  <div class="stat-box"><b>' + (d.wrong.length) + '</b><span>XATOLAR</span></div>';
+  html += '</div>';
+
+  /* Avatarni o'zgartirish */
+  html += '<div class="section-head" style="margin-top:40px"><h2 style="font-size:22px">Avatarni o\'zgartirish</h2></div>';
+  html += '<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:10px">';
+  AVATARS.forEach(function(a){
+    var sel = CURRENT_USER.avatar === a;
+    html += '<button class="avatar-opt' + (sel ? " sel" : "") + '" onclick="window.changeAvatar(\'' + a + '\')" style="font-size:32px">' + a + '</button>';
+  });
+  html += '</div>';
+
+  /* Actions */
+  html += '<div class="quiz-nav" style="margin-top:32px">';
+  html += '  <button class="btn" onclick="window.exportData()">📥 Ma\'lumotlarni yuklab olish</button>';
+  html += '  <button class="btn danger" onclick="window.deleteAccount()">⚠️ Akkauntni o\'chirish</button>';
+  html += '</div>';
+
+  html += '</section>';
+  document.getElementById("app").innerHTML = html;
+}
+
+window.logout = function(){
+  if(!confirm("Chiqishni xohlaysizmi?")) return;
+  Users.logout();
+  CURRENT_USER = null;
+  renderLogin();
+};
+
+window.changeAvatar = function(a){
+  CURRENT_USER.avatar = a;
+  Users.update(CURRENT_USER);
+  toast("Avatar o'zgartirildi ✓", "success");
+  renderProfile();
+};
+
+window.exportData = function(){
+  var data = {
+    user: { name: CURRENT_USER.name, email: CURRENT_USER.email, avatar: CURRENT_USER.avatar },
+    stats: CURRENT_USER.stats
+  };
+  var blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "pogona-" + CURRENT_USER.name.replace(/\s+/g, "-") + ".json";
+  a.click();
+  URL.revokeObjectURL(url);
+  toast("Yuklab olindi ✓", "success");
+};
+
+window.deleteAccount = function(){
+  if(!confirm("DIQQAT! Barcha ma'lumotlar o'chib ketadi. Ishonchingiz komilmi?")) return;
+  if(!confirm("Rostdan ham o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.")) return;
+  var all = Users.all().filter(function(u){ return u.id !== CURRENT_USER.id; });
+  Users.save(all);
+  Users.logout();
+  CURRENT_USER = null;
+  toast("Akkaunt o'chirildi", "success");
+  renderLogin();
+};
+  /* ============================================================
+   PRACTICE ENGINE
+   ============================================================ */
+function getPracticeData(k){
+  if(k === "grammar") return { t:"Grammatika", q: shuffle(GRAMMAR).slice(0, 10) };
+  if(k === "vocab"){
+    var picked = shuffle(VOCAB).slice(0, 10);
+    return {
+      t: "Lug'at",
+      q: picked.map(function(p){
+        var w = p[0], correct = p[1];
+        var others = shuffle(VOCAB.filter(function(x){ return x[0] !== w; }).map(function(x){ return x[1]; })).slice(0, 3);
+        return ['"' + w + '" nima degani?', [correct].concat(others), 0];
+      })
+    };
+  }
+  if(k === "kids") return { t:"Bolalar", q: shuffle(KIDS).slice(0, 10) };
+  if(k === "biz") return { t:"Biznes", q: shuffle(BUSINESS).slice(0, 10) };
+  if(k === "phrase") return { t:"Frazal fe'llar", q: shuffle(PHRASAL).slice(0, 10) };
+  return null;
+}
+
+function startPractice(k){
+  if(k === "read"){ startReading(); return; }
+  var d = getPracticeData(k);
+  if(!d){ home(); return; }
+  P = {
+    k: k, i: 0, s: 0, a: null, done: false,
+    d: { t: d.t },
+    q: d.q.map(function(r){
+      return {
+        t: r[0], e: r[3],
+        o: shuffle(r[1].map(function(x, j){ return { x:x, c: j === r[2] }; }))
+      };
+    })
+  };
+  renderPractice();
+}
+
+function startReading(){
+  var r = READINGS[Math.floor(Math.random() * READINGS.length)];
+  P = {
+    k: "read", i: 0, s: 0, a: null, done: false,
+    d: { t: "O'qish", p: r.text, title: r.title },
+    q: r.q.map(function(x){
+      return { t: x[0], o: shuffle(x[1].map(function(v, j){ return { x:v, c: j === x[2] }; })) };
+    })
+  };
+  renderPractice();
+}
+
+function renderPractice(){
+  var d = P.d, q = P.q[P.i], n = P.q.length, a = P.a;
+  var html = '<section class="quiz">';
+  html += '<div class="quiz-head">';
+  html += '  <span class="quiz-title">' + esc(d.t) + '</span>';
+  html += '  <div class="quiz-meta">';
+  html += '    <span class="chip">' + (P.i + 1) + '/' + n + '</span>';
+  html += '    <span class="chip good">✓ ' + P.s + '</span>';
+  html += '  </div>';
+  html += '</div>';
+  html += '<div class="progress"><i style="width:' + (P.i / n * 100) + '%"></i></div>';
+
+  if(d.p){
+    html += '<p class="passage"><b>' + esc(d.title || "") + '</b>';
+    html += esc(d.p);
+    html += ' <button class="icon-btn" style="padding:4px 10px;font-size:14px;min-height:32px" onclick="window.speakText(\'' + esc(d.p).replace(/'/g, "\\'") + '\')">🔊</button>';
+    html += '</p>';
+  }
+
+  html += '<h2 class="q-text">' + esc(q.t) + '</h2>';
+  html += '<div class="opts">';
+  q.o.forEach(function(o, j){
+    var cls = "opt";
+    if(a !== null){
+      if(o.c) cls += " good";
+      else if(j === a) cls += " badc";
+    }
+    html += '<button class="' + cls + '" data-k="' + j + '"' + (a !== null ? " disabled" : "") + '>';
+    html += '<kbd>' + (j + 1) + '</kbd>' + esc(o.x);
+    html += '</button>';
+  });
+  html += '</div>';
+
+  if(a !== null){
+    var ok = q.o[a].c;
+    html += '<p class="expl"><b>' + (ok ? "✅ To'g'ri!" : "❌ Noto'g'ri.") + '</b> ';
+    html += esc(q.e || (ok ? "Barakalla!" : "To'g'ri javob: " + q.o.filter(function(o){ return o.c; })[0].x));
+    html += '</p>';
+    html += '<div class="quiz-nav"><span></span>';
+    html += '<button class="btn primary" onclick="window.practiceNext()">' + (P.i === n - 1 ? "Yakunlash →" : "Keyingi →") + '</button>';
+    html += '</div>';
+  }
+
+  html += '</section>';
+  document.getElementById("app").innerHTML = html;
+
+  $$(".opt").forEach(function(b){
+    b.onclick = function(){ practiceAnswer(parseInt(b.dataset.k)); };
+  });
+}
+
+function practiceAnswer(j){
+  if(P.a !== null) return;
+  P.a = j;
+  var q = P.q[P.i];
+  if(q.o[j].c){
+    P.s++;
+    store.addXP(10);
+  } else {
+    store.addWrong({ t:q.t, correct:q.o.filter(function(o){ return o.c; })[0].x, chosen:q.o[j].x });
+  }
+  renderPractice();
+}
+
+function practiceNext(){
+  if(P.a === null) return;
+  if(P.i < P.q.length - 1){
+    P.i++; P.a = null; renderPractice();
+  } else {
+    finishPractice();
+  }
+}
+
+function finishPractice(){
+  P.done = true;
+  var n = P.q.length, p = Math.round(P.s / n * 100);
+  store.add({ l: P.d.t, p: p, date: new Date().toLocaleDateString("uz-UZ"), mode: P.k });
+  store.updateStreak();
+  updateStreakDisplay();
+  achv.check();
+
+  var msg = p >= 80 ? "🎉 Ajoyib natija!" : p >= 50 ? "👍 Yaxshi, davom eting!" : "💪 Yana urinib ko'ring.";
+  var xpEarned = P.s * 10;
+  var html = '<section class="result">';
+  html += '<div class="result-hero">';
+  html += '  <p style="color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px">' + esc(P.d.t) + '</p>';
+  html += '  <div class="result-level">' + P.s + '/' + n + '</div>';
+  html += '  <h2 class="result-title">' + msg + '</h2>';
+  html += '  <p class="result-desc">Natija: ' + p + '% · +' + xpEarned + ' XP</p>';
+  html += '</div>';
+  html += '<div class="quiz-nav" style="justify-content:center">';
+  html += '  <button class="btn primary" onclick="window.practiceAgain()">🔄 Qayta</button>';
+  html += '  <button class="btn" onclick="go(\'home\')">🏠 Bosh sahifa</button>';
+  html += '  <button class="btn" onclick="go(\'rate\')">🏆 Reyting</button>';
+  html += '</div>';
+  html += '</section>';
+  document.getElementById("app").innerHTML = html;
+
+  if(p >= 80) confetti(60);
+  else if(p >= 50) confetti(20);
+}
+
+window.practiceNext = practiceNext;
+window.practiceAgain = function(){ startPractice(P.k); };
+
+/* ============================================================
+   LISTENING
+   ============================================================ */
+function startListening(){
+  P = {
+    k: "listen", i: 0, s: 0, a: null, done: false,
+    d: { t: "Tinglash" },
+    q: shuffle(LISTENING).slice(0, 10).map(function(r){
+      return {
+        t: r[0], e: r[3],
+        o: shuffle(r[1].map(function(x, j){ return { x:x, c: j === r[2] }; }))
+      };
+    })
+  };
+  renderListening();
+}
+
+function renderListening(){
+  var q = P.q[P.i], n = P.q.length, a = P.a;
+  var html = '<section class="quiz">';
+  html += '<div class="quiz-head">';
+  html += '  <span class="quiz-title">🎧 Tinglash</span>';
+  html += '  <div class="quiz-meta">';
+  html += '    <span class="chip">' + (P.i + 1) + '/' + n + '</span>';
+  html += '    <span class="chip good">✓ ' + P.s + '</span>';
+  html += '  </div>';
+  html += '</div>';
+  html += '<div class="progress"><i style="width:' + (P.i / n * 100) + '%"></i></div>';
+
+  html += '<div class="passage" style="text-align:center;padding:36px 20px">';
+  html += '  <button class="btn primary lg" onclick="window.playAudio()">🔊 Tinglash</button>';
+  html += '  <p style="color:var(--text-2);font-size:13px;margin-top:14px;font-weight:600">Tugmani bosing va diqqat bilan tinglang</p>';
+  if(a !== null){
+    html += '  <p style="margin-top:22px;font-style:italic;color:var(--text-2);font-size:14px">"' + esc(q.t) + '"</p>';
+  }
+  html += '</div>';
+
+  html += '<h2 class="q-text" style="font-size:20px">Savolga javob bering:</h2>';
+  html += '<div class="opts">';
+  q.o.forEach(function(o, j){
+    var cls = "opt";
+    if(a !== null){
+      if(o.c) cls += " good";
+      else if(j === a) cls += " badc";
+    }
+    html += '<button class="' + cls + '" data-k="' + j + '"' + (a !== null ? " disabled" : "") + '>';
+    html += '<kbd>' + (j + 1) + '</kbd>' + esc(o.x);
+    html += '</button>';
+  });
+  html += '</div>';
+
+  if(a !== null){
+    var ok = q.o[a].c;
+    html += '<p class="expl"><b>' + (ok ? "✅ To'g'ri!" : "❌ Noto'g'ri.") + '</b> ' + esc(q.e || "");
+    html += '</p>';
+    html += '<div class="quiz-nav"><span></span>';
+    html += '<button class="btn primary" onclick="window.listenNext()">' + (P.i === n - 1 ? "Yakunlash →" : "Keyingi →") + '</button>';
+    html += '</div>';
+  }
+  html += '</section>';
+  document.getElementById("app").innerHTML = html;
+
+  $$(".opt").forEach(function(b){
+    b.onclick = function(){
+      if(P.a !== null) return;
+      P.a = parseInt(b.dataset.k);
+      if(q.o[P.a].c){
+        P.s++;
+        store.addXP(10);
+      } else {
+        store.addWrong({ t:q.t, correct:q.o.filter(function(o){ return o.c; })[0].x, chosen:q.o[P.a].x });
+      }
+      renderListening();
+    };
+  });
+
+  setTimeout(function(){ speak(q.t); }, 500);
+}
+
+window.playAudio = function(){ if(P && P.q[P.i]) speak(P.q[P.i].t); };
+window.listenNext = function(){
+  if(P.a === null) return;
+  if(P.i < P.q.length - 1){
+    P.i++; P.a = null; renderListening();
+  } else {
+    P.done = true;
+    var n = P.q.length, p = Math.round(P.s / n * 100);
+    store.add({ l: "Tinglash", p: p, date: new Date().toLocaleDateString("uz-UZ"), mode: "listen" });
+    store.updateStreak();
+    updateStreakDisplay();
+    achv.check();
+
+    var html = '<section class="result">';
+    html += '<div class="result-hero">';
+    html += '  <p style="color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px">Tinglash</p>';
+    html += '  <div class="result-level">' + P.s + '/' + n + '</div>';
+    html += '  <h2 class="result-title">' + (p >= 80 ? "🎉 Ajoyib!" : p >= 50 ? "👍 Yaxshi!" : "💪 Yana urinib ko'ring") + '</h2>';
+    html += '  <p class="result-desc">Natija: ' + p + '% · +' + (P.s * 10) + ' XP</p>';
+    html += '</div>';
+    html += '<div class="quiz-nav" style="justify-content:center">';
+    html += '  <button class="btn primary" onclick="go(\'listen\')">🔄 Qayta</button>';
+    html += '  <button class="btn" onclick="go(\'home\')">🏠 Bosh sahifa</button>';
+    html += '</div>';
+    html += '</section>';
+    document.getElementById("app").innerHTML = html;
+    if(p >= 80) confetti(60);
+  }
+};
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+function startCards(){
+  C = { i: 0, f: false, k: 0, list: shuffle(VOCAB) };
+  renderCards();
+}
+
+function renderCards(){
+  var w = C.list[C.i];
+  var html = '<section class="quiz">';
+  html += '<div class="quiz-head">';
+  html += '  <span class="quiz-title">🃏 Kartochkalar</span>';
+  html += '  <div class="quiz-meta">';
+  html += '    <span class="chip">' + (C.i + 1) + '/' + C.list.length + '</span>';
+  html += '    <span class="chip good">✓ ' + C.k + '</span>';
+  html += '  </div>';
+  html += '</div>';
+  html += '<div class="progress"><i style="width:' + (C.i / C.list.length * 100) + '%"></i></div>';
+
+  html += '<div class="flashcard" onclick="window.flipCard()">';
+  html += esc(C.f ? w[1] : w[0]);
+  html += '<small>' + (C.f ? "o'zbekcha · o'girish uchun bosing" : "inglizcha · o'girish uchun bosing") + '</small>';
+  html += '</div>';
+
+  html += '<div class="quiz-nav" style="margin-top:20px">';
+  html += '  <button class="btn" onclick="window.cardMove(-1)">← Orqaga</button>';
+  html += '  <button class="icon-btn" onclick="window.cardSpeak()" style="padding:12px 16px;min-height:48px">🔊</button>';
+  html += '  <button class="btn primary" onclick="window.cardKnow()">Bilaman ✓</button>';
+  html += '  <button class="btn" onclick="window.cardMove(1)">Keyingi →</button>';
+  html += '</div>';
+  html += '</section>';
+  document.getElementById("app").innerHTML = html;
+}
+
+window.flipCard = function(){ C.f = !C.f; renderCards(); };
+window.cardMove = function(d){ C.i = (C.i + d + C.list.length) % C.list.length; C.f = false; renderCards(); };
+window.cardKnow = function(){
+  store.saveCard(C.list[C.i][0]);
+  store.addXP(5);
+  C.k++;
+  achv.check();
+  window.cardMove(1);
+};
+window.cardSpeak = function(){ speak(C.list[C.i][0]); };
+
+/* ============================================================
+   WRITING
+   ============================================================ */
+function startWriting(){
+  var task = WRITING[Math.floor(Math.random() * WRITING.length)];
+  var d = store.get();
+  var saved = (d.writing && d.writing[task.title]) || "";
+
+  var html = '<section class="quiz">';
+  html += '<div class="quiz-head">';
+  html += '  <span class="quiz-title">✍️ Yozish mashqi</span>';
+  html += '</div>';
+  html += '<h2 class="q-text" style="font-size:clamp(22px,4vw,30px)">' + esc(task.title) + '</h2>';
+  html += '<p style="color:var(--text-2);font-size:15px;margin-bottom:14px">' + esc(task.prompt) + '</p>';
+  html += '<p style="color:var(--primary);font-size:13px;margin-bottom:18px;font-weight:600">💡 ' + esc(task.hint) + '</p>';
+  html += '<textarea id="wt" rows="8" style="width:100%;padding:16px;border-radius:14px;border:1.5px solid var(--line-2);background:var(--panel);color:var(--text);font:16px/1.6 Manrope,sans-serif;resize:vertical;min-height:180px" placeholder="Bu yerga yozing...">' + esc(saved) + '</textarea>';
+  html += '<div class="quiz-meta" style="margin-top:12px;justify-content:space-between">';
+  html += '  <span class="chip" id="wc">0 so\'z</span>';
+  html += '  <span class="chip" id="ch">0 belgi</span>';
+  html += '</div>';
+  html += '<div class="quiz-nav">';
+  html += '  <button class="btn primary" onclick="window.saveWriting(\'' + esc(task.title).replace(/'/g, "\\'") + '\')">💾 Saqlash</button>';
+  html += '  <button class="btn" onclick="go(\'write\')">🔄 Boshqa</button>';
+  html += '  <button class="btn" onclick="window.clearWriting()">🗑 Tozalash</button>';
+  html += '</div>';
+  html += '</section>';
+  document.getElementById("app").innerHTML = html;
+
+  var ta = $("#wt");
+  function upd(){
+    var t = ta.value.trim();
+    $("#wc").textContent = (t ? t.split(/\s+/).length : 0) + " so'z";
+    $("#ch").textContent = ta.value.length + " belgi";
+  }
+  ta.addEventListener("input", upd);
+  upd();
+}
+
+window.saveWriting = function(title){
+  var ta = $("#wt");
+  if(!ta) return;
+  store.saveWriting(title, ta.value);
+  store.addXP(20);
+  achv.unlock("writer");
+  toast("✅ Saqlandi +20 XP", "success");
+};
+
+window.clearWriting = function(){
+  if(!confirm("Yozuv tozalansinmi?")) return;
+  var ta = $("#wt");
+  if(ta){
+    ta.value = "";
+    var ev = new Event("input");
+    ta.dispatchEvent(ev);
+  }
+};
+
+/* ============================================================
+   TIPS
+   ============================================================ */
+function renderTips(){
+  var html = '<section class="section">';
+  html += '<div class="section-head"><h2>💡 Oltin maslahatlar</h2>';
+  html += '<p>Ingliz tilini tez va samarali o\'rganishning 12 ta isbotlangan yo\'li.</p></div>';
+  html += '<div class="tips">';
+  TIPS.forEach(function(t, i){
+    html += '<div class="tip">';
+    html += '  <div class="tip-icon">' + t.icon + '</div>';
+    html += '  <div>';
+    html += '    <h4>' + (i + 1) + '. ' + esc(t.title) + '</h4>';
+    html += '    <p>' + esc(t.text) + '</p>';
+    html += '  </div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</section>';
+
+  html += '<section class="section"><div class="daily">';
+  html += '  <div><h2>🎯 Kuniga 15 daqiqa</h2>';
+  html += '  <p>Eng muhim qoida — doimiylik. Haftada bir marta 3 soatdan ko\'ra, har kuni 15 daqiqa foydaliroq.</p>';
+  html += '  <button class="btn lg" onclick="go(\'level\')">Testdan boshlash 🚀</button></div>';
+  html += '  <div class="daily-content" style="font-size:72px;text-align:center">💪</div>';
+  html += '</div></section>';
+
+  document.getElementById("app").innerHTML = html;
+}
+
+/* ============================================================
+   ACHIEVEMENTS
+   ============================================================ */
+function renderAchv(){
+  var d = store.get();
+  var unlocked = d.achievements.length;
+  var total = ACHIEVEMENTS.length;
+
+  var html = '<section class="section">';
+  html += '<div class="section-head">';
+  html += '  <h2>🏅 Yutuqlar</h2>';
+  html += '  <p>Sizda <b style="color:var(--primary);font-size:18px">' + unlocked + '/' + total + '</b> yutuq</p>';
+  html += '</div>';
+  html += '<div class="progress" style="margin-bottom:28px"><i style="width:' + (unlocked / total * 100) + '%"></i></div>';
+  html += '<div class="achievements">';
+  ACHIEVEMENTS.forEach(function(a){
+    var has = d.achievements.indexOf(a.id) !== -1;
+    html += '<div class="achv ' + (has ? "unlocked" : "locked") + '">';
+    html += '  <div class="achv-emoji">' + a.emoji + '</div>';
+    html += '  <b>' + esc(a.title) + '</b>';
+    html += '  <small>' + esc(a.desc) + '</small>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</section>';
+
+  document.getElementById("app").innerHTML = html;
+}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+function renderStats(){
+  var d = store.get();
+  var totalAttempts = d.history.length;
+  var avg = 0, best = 0;
+  if(totalAttempts){
+    var sum = 0;
+    d.history.forEach(function(h){
+      sum += h.p;
+      if(h.p > best) best = h.p;
+    });
+    avg = Math.round(sum / totalAttempts);
+  }
+
+  var html = '<section class="section">';
+  html += '<div class="section-head"><h2>📊 Statistika</h2>';
+  html += '<p>Sizning umumiy natijalaringiz.</p></div>';
+
+  html += '<div class="stat-grid">';
+  html += '  <div class="stat-box"><b>' + (d.xp || 0) + '</b><span>XP</span></div>';
+  html += '  <div class="stat-box"><b>' + totalAttempts + '</b><span>TESTLAR</span></div>';
+  html += '  <div class="stat-box"><b>' + avg + '%</b><span>O\'RTACHA</span></div>';
+  html += '  <div class="stat-box"><b>' + best + '%</b><span>ENG YAXSHI</span></div>';
+  html += '  <div class="stat-box"><b>' + d.streak.days + '🔥</b><span>SERIYA</span></div>';
+  html += '  <div class="stat-box"><b>' + d.streak.best + '⭐</b><span>REKORD</span></div>';
+  html += '</div>';
+
+  /* Calendar */
+  html += '<div class="section-head" style="margin-top:44px"><h2 style="font-size:22px">📅 Faollik kalendari</h2>';
+  html += '<p>Oxirgi 30 kunlik mashqlaringiz.</p></div>';
+  html += '<div class="calendar">';
+  var cal = d.streak.calendar || [];
+  for(var i = 29; i >= 0; i--){
+    var dt = new Date(Date.now() - i * 86400000);
+    var iso = dt.toISOString().slice(0,10);
+    var active = cal.indexOf(iso) !== -1;
+    var isToday = iso === todayISO();
+    html += '<div class="cal-day' + (active ? " active" : "") + (isToday ? " today" : "") + '" title="' + iso + '">' + dt.getDate() + '</div>';
+  }
+  html += '</div>';
+
+  /* History */
+  html += '<div class="section-head" style="margin-top:44px"><h2 style="font-size:22px">Oxirgi natijalar</h2></div>';
+  if(d.history.length){
+    html += '<div class="hist">';
+    d.history.slice(0, 20).forEach(function(h){
+      html += '<div class="hist-item"><b>' + esc(h.l) + '</b> · ' + h.p + '% · ' + esc(h.date) + '</div>';
+    });
+    html += '</div>';
+  } else {
+    html += '<p style="color:var(--text-2)">Hali natijalar yo\'q. Testdan boshlang!</p>';
+  }
+
+  /* Wrong */
+  html += '<div class="section-head" style="margin-top:44px"><h2 style="font-size:22px">❌ Xatolar (' + d.wrong.length + ')</h2></div>';
+  if(d.wrong.length){
+    html += '<div class="wrong-list">';
+    d.wrong.slice(0, 30).forEach(function(w){
+      html += '<div class="wrong-item">';
+      html += '  <small>SAVOL</small>';
+      html += '  <div style="margin-bottom:6px;font-weight:600">' + esc(w.t) + '</div>';
+      html += '  <div style="font-size:13px">Sizning javob: <span style="color:var(--danger);font-weight:700">' + esc(w.chosen) + '</span></div>';
+      html += '  <div style="font-size:13px">To\'g\'ri javob: <span class="correct">' + esc(w.correct) + '</span></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  } else {
+    html += '<div class="wrong-item" style="border-left-color:var(--success)">🎉 Xatolar yo\'q!</div>';
+  }
+
+  /* Actions */
+  html += '<div class="quiz-nav" style="margin-top:28px">';
+  html += '  <button class="btn" onclick="window.clearWrongs()">🗑 Xatolarni tozalash</button>';
+  html += '</div>';
+
+  html += '</section>';
+  document.getElementById("app").innerHTML = html;
+}
+
+window.clearWrongs = function(){
+  if(!confirm("Xatolar tozalansinmi?")) return;
+  store.clearWrong();
+  renderStats();
+  toast("Tozalandi", "success");
+};
+  /* ============================================================
+   LEVEL TEST
+   ============================================================ */
+function startLevelTest(){
+  var q = [];
+  for(var lv = 0; lv < 6; lv++){
+    var bucket = [];
+    for(var i = lv * 10; i < lv * 10 + 10 && i < RAW.length; i++){
+      bucket.push(RAW[i]);
+    }
+    var picked = shuffle(bucket).slice(0, 5);
+    picked.forEach(function(r){
+      q.push({
+        lv: lv,
+        t: r[0],
+        o: shuffle(r[1].map(function(x, k){ return { x:x, c: k === r[2] }; }))
+      });
+    });
+  }
+  S = { i: 0, a: [], t: Date.now(), q: q, done: false };
+  renderQuiz();
+  startTimer();
+}
+
+function startTimer(){
+  stopTimer();
+  var start = Date.now();
+  timerInterval = setInterval(function(){
+    var el = $("#tmr");
+    if(!el) return;
+    var sec = Math.floor((Date.now() - start) / 1000);
+    var m = ("0" + Math.floor(sec / 60)).slice(-2);
+    var s = ("0" + (sec % 60)).slice(-2);
+    el.textContent = "⏱ " + m + ":" + s;
+    el.className = "chip timer" + (sec > 480 ? " danger" : sec > 300 ? " warn" : "");
+  }, 1000);
+}
+
+function stopTimer(){
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+}
+
+function renderQuiz(){
+  var q = S.q[S.i], n = S.q.length, sel = S.a[S.i];
+  var html = '<section class="quiz">';
+  html += '<div class="quiz-head">';
+  html += '  <span class="quiz-title">🎯 Daraja testi</span>';
+  html += '  <div class="quiz-meta">';
+  html += '    <span class="chip">' + (S.i + 1) + '/' + n + '</span>';
+  html += '    <span class="chip timer" id="tmr">⏱ 00:00</span>';
+  html += '  </div>';
+  html += '</div>';
+  html += '<div class="progress"><i style="width:' + (S.i / n * 100) + '%"></i></div>';
+  html += '<h2 class="q-text">' + esc(q.t) + '</h2>';
+  html += '<div class="opts">';
+  q.o.forEach(function(o, k){
+    html += '<button class="opt' + (sel === k ? " sel" : "") + '" data-k="' + k + '">';
+    html += '<kbd>' + (k + 1) + '</kbd>' + esc(o.x);
+    html += '</button>';
+  });
+  html += '</div>';
+  html += '<div class="quiz-nav">';
+  html += '  <button class="btn" onclick="window.quizBack()"' + (S.i === 0 ? " disabled" : "") + '>← Orqaga</button>';
+  html += '  <button class="btn primary" onclick="window.quizNext()"' + (sel === undefined ? " disabled" : "") + '>';
+  html += (S.i === n - 1 ? "Natijani ko'rish →" : "Keyingi →");
+  html += '  </button>';
+  html += '</div>';
+  html += '</section>';
+  document.getElementById("app").innerHTML = html;
+
+  $$(".opt").forEach(function(b){
+    b.onclick = function(){ quizPick(parseInt(b.dataset.k)); };
+  });
+}
+
+function quizPick(k){
+  S.a[S.i] = k;
+  renderQuiz();
+}
+
+window.quizBack = function(){
+  if(S.i > 0){ S.i--; renderQuiz(); }
+};
+
+window.quizNext = function(){
+  if(S.a[S.i] === undefined) return;
+  if(S.i < S.q.length - 1){
+    S.i++; renderQuiz();
+  } else {
+    renderResult();
+  }
+};
+
+/* ============================================================
+   RESULT
+   ============================================================ */
+function renderResult(){
+  stopTimer();
+  S.done = true;
+
+  var sc = [0,0,0,0,0,0];
+  S.q.forEach(function(q, i){
+    if(q.o[S.a[i]] && q.o[S.a[i]].c) sc[q.lv]++;
+  });
+
+  var idx = -1;
+  for(var l = 0; l < 6; l++){
+    if(sc[l] >= 3) idx = l;
+    else break;
+  }
+
+  var lv = idx < 0 ? "Pre-A1" : LEVELS[idx];
+  var total = sc.reduce(function(a,b){ return a+b; }, 0);
+  var pct = Math.round(total / 30 * 100);
+  var mins = Math.max(1, Math.round((Date.now() - S.t) / 60000));
+
+  /* XP bonus: to'g'ri javoblar * 10 + daraja bonus */
+  var xpBonus = total * 10;
+  if(idx >= 0) xpBonus += (idx + 1) * 20;
+
+  store.add({ l: lv, p: pct, date: new Date().toLocaleDateString("uz-UZ"), mode: "level" });
+  store.addXP(xpBonus);
+  store.updateStreak();
+  updateStreakDisplay();
+
+  var wrong = [];
+  S.q.forEach(function(q, i){
+    if(!(q.o[S.a[i]] && q.o[S.a[i]].c)){
+      wrong.push({ q: q, i: i });
+      var chosen = S.a[i] !== undefined ? q.o[S.a[i]].x : "—";
+      store.addWrong({
+        t: q.t,
+        correct: q.o.filter(function(o){ return o.c; })[0].x,
+        chosen: chosen
+      });
+    }
+  });
+
+  achv.check();
+
+  var info = LEVEL_INFO[lv];
+
+  var html = '<section class="result">';
+  html += '<div class="result-hero">';
+  html += '  <p style="color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px">Sizning darajangiz</p>';
+  html += '  <div class="result-level">' + lv + '</div>';
+  html += '  <h2 class="result-title">' + info.emoji + ' ' + esc(info.name) + '</h2>';
+  html += '  <p class="result-desc">' + esc(info.desc) + '</p>';
+  html += '  <p style="color:var(--primary);font-weight:800;font-size:16px;margin-top:16px">+' + xpBonus + ' XP</p>';
+  html += '</div>';
+
+  /* Actions */
+  html += '<div class="quiz-nav" style="justify-content:center;margin-bottom:32px">';
+  html += '  <button class="btn primary" onclick="window.retakeTest()">🔄 Qayta</button>';
+  html += '  <button class="btn" onclick="window.showCert(\'' + lv + '\',' + total + ',' + pct + ')">🎓 Sertifikat</button>';
+  html += '  <button class="btn" onclick="window.copyResult(\'' + lv + '\',' + total + ',' + pct + ')">📋 Nusxalash</button>';
+  html += '  <button class="btn" onclick="window.shareResult(\'' + lv + '\',' + total + ',' + pct + ')">📤 Ulashish</button>';
+  html += '  <button class="btn" onclick="go(\'home\')">🏠 Asosiy</button>';
+  html += '</div>';
+
+  /* Info grid */
+  html += '<div class="result-grid">';
+
+  /* LEFT: Levels */
+  html += '<div class="result-col">';
+  html += '  <h3>📊 Daraja bo\'yicha</h3>';
+  html += '  <div class="level-rows">';
+  LEVELS.forEach(function(l, i){
+    html += '<div class="level-row' + (sc[i] >= 3 ? " pass" : "") + '">';
+    html += '  <span>' + l + '</span>';
+    html += '  <div class="bar"><i style="width:' + (sc[i] * 20) + '%"></i></div>';
+    html += '  <span>' + sc[i] + '/5</span>';
+    html += '</div>';
+  });
+  html += '  </div>';
+  html += '  <p style="color:var(--text-2);font-size:13px;margin-top:14px;font-weight:600">';
+  html += '    Jami: <b style="color:var(--primary)">' + total + '/30</b> (' + pct + '%) · ' + mins + ' daqiqa';
+  html += '  </p>';
+  html += '  <h3 style="margin-top:32px">🎯 Keyingi qadam — ' + (info.next || "eng yuqori") + '</h3>';
+  html += '  <ul style="padding-left:20px;color:var(--text-2);font-size:13px;line-height:1.9;margin-top:10px">';
+  info.tips.forEach(function(t){
+    html += '<li>' + esc(t) + '</li>';
+  });
+  html += '  </ul>';
+  html += '</div>';
+
+  /* RIGHT: Wrong answers */
+  html += '<div class="result-col">';
+  html += '  <h3>❌ Xatolar (' + wrong.length + ')</h3>';
+  if(wrong.length){
+    html += '  <div class="wrong-list">';
+    wrong.forEach(function(w){
+      html += '<div class="wrong-item">';
+      html += '  <small>' + LEVELS[w.q.lv] + '</small>';
+      html += '  <div style="margin-bottom:6px;font-weight:600">' + esc(w.q.t) + '</div>';
+      html += '  <div style="font-size:13px">To\'g\'ri: <span class="correct">' + esc(w.q.o.filter(function(o){ return o.c; })[0].x) + '</span></div>';
+      html += '</div>';
+    });
+    html += '  </div>';
+  } else {
+    html += '  <div class="wrong-item" style="border-left-color:var(--success)">🎉 Xato yo\'q! Ajoyib natija!</div>';
+  }
+  html += '</div>';
+
+  html += '</div>';
+  html += '</section>';
+
+  document.getElementById("app").innerHTML = html;
+
+  if(pct >= 80) confetti(100);
+  else if(pct >= 50) confetti(40);
+}
+
+window.retakeTest = function(){ startLevelTest(); };
+
+window.copyResult = function(lv, total, pct){
+  var text = "🎯 Mening ingliz tili darajam: " + lv + " (" + total + "/30, " + pct + "%) — pog'ona testi\n👉 t.me/Muhammad1y_20";
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){
+      toast("✅ Nusxalandi", "success");
+      achv.unlock("social");
+    }).catch(function(){ fallbackCopy(text); });
+  } else {
+    fallbackCopy(text);
+  }
+};
+
+window.shareResult = function(lv, total, pct){
+  var text = "🎯 Mening ingliz tili darajam: " + lv + " (" + total + "/30, " + pct + "%) — pog'ona testi";
+  var url = "https://t.me/Muhammad1y_20";
+  if(navigator.share){
+    navigator.share({
+      title: "Pog'ona natijam",
+      text: text,
+      url: url
+    }).then(function(){
+      achv.unlock("social");
+    }).catch(function(){});
+  } else {
+    window.copyResult(lv, total, pct);
+  }
+};
+
+function fallbackCopy(text){
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try{
+    document.execCommand("copy");
+    toast("✅ Nusxalandi", "success");
+    achv.unlock("social");
+  }catch(e){
+    toast("Nusxalanmadi", "error");
+  }
+  document.body.removeChild(ta);
+}
+
+window.showCert = function(lv, total, pct){
+  var date = new Date().toLocaleDateString("uz-UZ");
+  var info = LEVEL_INFO[lv];
+  var html = '';
+  html += '<div style="text-align:center">';
+  html += '<div class="certificate">';
+  html += '  <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-2);font-weight:700;margin-bottom:8px">Sertifikat</p>';
+  html += '  <h2>Ingliz tili darajasi</h2>';
+  html += '  <div class="cert-level">' + lv + '</div>';
+  html += '  <p style="color:var(--text-2);font-size:13px;margin:6px 0">' + info.emoji + ' ' + esc(info.name) + '</p>';
+  html += '  <p style="color:var(--text-2);font-size:13px;margin-top:14px">Quyidagi shaxs muvaffaqiyatli topshirdi</p>';
+  html += '  <div class="cert-name">' + esc(CURRENT_USER.name) + '</div>';
+  html += '  <p style="color:var(--text-2);font-size:13px;margin-top:10px">Natija: <b style="color:var(--primary)">' + total + '/30 (' + pct + '%)</b></p>';
+  html += '  <p class="cert-date">📅 ' + date + ' · pog\'ona platformasi</p>';
+  html += '</div>';
+  html += '<div style="margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">';
+  html += '  <button class="btn primary" onclick="window.print()">🖨 Chop etish</button>';
+  html += '  <button class="btn" onclick="window.closeModal()">Yopish</button>';
+  html += '</div>';
+  html += '</div>';
+  openModal(html);
+  confetti(80);
+  achv.unlock("social");
+};
+
+/* ============================================================
+   KEYBOARD SHORTCUTS
+   ============================================================ */
+document.addEventListener("keydown", function(e){
+  if(e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") return;
+  if(e.target.isContentEditable) return;
+
+  if(S && !S.done && $(".quiz")){
+    if(e.key >= "1" && e.key <= "4"){ quizPick(parseInt(e.key) - 1); e.preventDefault(); }
+    else if(e.key === "Enter"){ window.quizNext(); e.preventDefault(); }
+    else if(e.key === "ArrowLeft" && S.i > 0){ S.i--; renderQuiz(); }
+    else if(e.key === "ArrowRight"){ window.quizNext(); }
+  } else if(P && !P.done && $(".quiz")){
+    if(e.key >= "1" && e.key <= "4"){ practiceAnswer(parseInt(e.key) - 1); e.preventDefault(); }
+    else if(e.key === "Enter"){
+      if(P.k === "listen") window.listenNext();
+      else practiceNext();
+      e.preventDefault();
+    }
+  }
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+(function init(){
+  /* Saqlangan foydalanuvchi bormi? */
+  var savedId = Users.getCurrentId();
+  if(savedId){
+    var u = Users.find(savedId);
+    if(u){
+      CURRENT_USER = u;
+      initApp();
+      return;
+    }
+  }
+  renderLogin();
+})();
+
+/* Debug uchun */
+window.__pogona = {
+  users: Users,
+  store: store,
+  achv: achv,
+  go: go,
+  currentUser: function(){ return CURRENT_USER; }
+};
+
+})();
+</script>
+</body>
+</html>
