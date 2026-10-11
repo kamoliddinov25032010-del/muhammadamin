@@ -604,6 +604,10 @@ body::before{inset:0;top:0;left:0;width:auto;height:auto;animation:none;backgrou
 .btn,.icon-btn,.nav button,.opt{min-height:44px}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .chip,.lb-score b,.hero-stat b,.stat-box b{font-variant-numeric:tabular-nums}
+.nw{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:99px;background:var(--gold);color:#2b1d03;font:800 10px/1.5 Manrope,sans-serif;letter-spacing:.04em;vertical-align:middle;font-style:normal}
+.card>.nw{position:absolute;top:16px;right:16px;margin:0}
+.warn-line{color:var(--accent);font-weight:700;font-size:14px}
+.section{content-visibility:auto;contain-intrinsic-size:auto 420px}
 </style>
 </head>
 <body>
@@ -972,7 +976,7 @@ var WEEK_PLAN = [
 var MENU = [
   ["home","🏠 Asosiy"],
   ["level","🎯 Test"],
-  ["rate","🏆 Reyting"],
+  ["rate","🏆 Reyting"],["tasks","✅ Vazifalar"],["lessons","🎓 Darslar"],["rewards","🎁 Mukofotlar"],
   ["grammar","📘 Grammatika"],
   ["vocab","📖 Lug'at"],
   ["read","📚 O'qish"],
@@ -1174,7 +1178,7 @@ var store = {
     if(!CURRENT_USER) return;
     Users.update(CURRENT_USER);
   },
-  add: function(r){
+  add: function(r){ try{taskHook(r)}catch(e){}
     var d = this.get();
     if(!d) return;
     d.history.unshift(r);
@@ -1386,7 +1390,7 @@ function renderLogin(){
 /* ============================================================
    ASOSIY ILOVA
    ============================================================ */
-function initApp(){ setTimeout(function(){ if(CURRENT_USER) ensureReg(CURRENT_USER).then(pushStats).then(function(){refreshBoard()}).catch(function(){refreshBoard()}); },0);
+function initApp(){ setTimeout(showNews,900); setTimeout(function(){ if(CURRENT_USER) ensureReg(CURRENT_USER).then(pushStats).then(function(){refreshBoard()}).catch(function(){refreshBoard()}); },0);
   if(!CURRENT_USER){
     var id = Users.getCurrentId();
     if(id) CURRENT_USER = Users.find(id);
@@ -1441,7 +1445,7 @@ function initApp(){ setTimeout(function(){ if(CURRENT_USER) ensureReg(CURRENT_US
   /* Nav */
   var navEl = document.getElementById("nav");
   navEl.innerHTML = MENU.map(function(m){
-    return '<button data-k="' + m[0] + '">' + esc(m[1]) + '</button>';
+    return '<button data-k="' + m[0] + '">' + esc(m[1]) + (NEWK[m[0]] ? '<i class="nw">Yangi</i>' : '') + '</button>';
   }).join("");
   navEl.onclick = function(e){
     var b = e.target.closest("button");
@@ -1486,6 +1490,9 @@ function go(k){
   achv.check();
 
   if(k === "home") home();
+  else if(k === "tasks") renderTasks();
+  else if(k === "lessons") renderLessons();
+  else if(k === "rewards") renderRewards();
   else if(k === "level") startLevelTest();
   else if(k === "rate"){ renderRating(); refreshBoard(function(){ var b=$("#nav button.on"); if(b&&b.dataset.k==="rate") renderRating(); }); }
   else if(k === "cards") startCards();
@@ -1532,6 +1539,7 @@ function home(){
   });
   html += '</div></section>';
 
+  html += taskCard();
   /* Daily bonus */
   if(store.canClaimBonus()){
     html += '<section class="section"><div class="daily">';
@@ -1580,6 +1588,7 @@ function home(){
   html += '  <div class="grid">';
   MODES.forEach(function(m){
     html += '<div class="card hoverable" onclick="go(\'' + m.key + '\')">';
+    html += (NEWK[m.key] ? '<span class="nw">Yangi</span>' : '');
     html += '  <div class="card-icon ' + m.cls + '">' + m.icon + '</div>';
     html += '  <h3>' + esc(m.title) + '</h3>';
     html += '  <p>' + esc(m.desc) + '</p>';
@@ -1818,6 +1827,7 @@ function getPracticeData(k){
 }
 
 function startPractice(k){
+  if(k === "lesson"){ startLesson(P.LI); return; }
   if(k === "read"){ startReading(); return; }
   var d = getPracticeData(k);
   if(!d){ home(); return; }
@@ -1922,6 +1932,7 @@ function practiceNext(){
 function finishPractice(){
   if(P.done) return;
   P.done = true;
+  lessonHook();
   var n = P.q.length, p = Math.round(P.s / n * 100);
   store.add({ l: P.d.t, p: p, date: new Date().toLocaleDateString("uz-UZ"), mode: P.k });
   store.updateStreak();
@@ -2320,6 +2331,7 @@ function startLevelTest(){
     for(var i = lv * 10; i < lv * 10 + 10 && i < RAW.length; i++){
       bucket.push(RAW[i]);
     }
+    (EXTRA[lv]||[]).forEach(function(r){ bucket.push(r); });
     var picked = shuffle(bucket).slice(0, 5);
     picked.forEach(function(r){
       q.push({
@@ -2651,6 +2663,55 @@ window.speakCur=function(){if(P&&P.d&&P.d.p)speak(P.d.p)};
 var errAt=0;
 window.addEventListener("error",function(){if(Date.now()-errAt>8000){errAt=Date.now();toast("Kutilmagan xatolik. Sahifani yangilang.","error")}});
 if("serviceWorker" in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});
+/* ===== v6: vazifalar, darslar, mukofotlar, ko'proq savol ===== */
+var NEWK={tasks:1,lessons:1,rewards:1,level:1,grammar:1,vocab:1,phrase:1,biz:1,listen:1};
+MODES.unshift({key:"tasks",icon:"✅",cls:"grad-3",title:"Kunlik vazifalar",desc:"Har kuni 3 ta vazifa. Bajarsangiz sandiq ochiladi.",tag:"Har kuni"},{key:"lessons",icon:"🎓",cls:"grad-1",title:"Darslar",desc:"Qisqa qoida va mashq. Har dars +40 XP.",tag:"6 ta dars"},{key:"rewards",icon:"🎁",cls:"grad-2",title:"Mukofotlar",desc:"Daraja, seriya bonuslari va XP.",tag:"Bonus"});
+VOCAB.push.apply(VOCAB,[["arrive","yetib kelmoq"],["depart","jo'nab ketmoq"],["invent","ixtiro qilmoq"],["gather","yig'moq"],["repair","ta'mirlamoq"],["admire","qoyil qolmoq"],["argue","bahslashmoq"],["belong","tegishli bo'lmoq"],["cancel","bekor qilmoq"],["celebrate","nishonlamoq"],["collect","to'plamoq"],["comfortable","qulay"],["dangerous","xavfli"],["tiny","juda kichik"],["familiar","tanish"],["fragile","mo'rt"],["gradually","asta-sekin"],["harmful","zararli"],["ignore","e'tiborsiz qoldirmoq"],["lecture","ma'ruza"],["nowadays","hozirgi kunda"],["ordinary","oddiy"],["politely","xushmuomalalik bilan"],["quarrel","janjal"],["rarely","kamdan-kam"],["safety","xavfsizlik"],["temporary","vaqtinchalik"],["unusual","g'ayrioddiy"],["wisdom","donolik"],["worry","xavotirlanmoq"]]);
+GRAMMAR.push.apply(GRAMMAR,[["He has lived here ___ ten years.",["for","since","ago","during"],0,"for + davr"],["Look! It ___ now.",["rains","is raining","rained","rain"],1,"Present Continuous"],["I didn't see ___ at the party.",["nobody","anybody","somebody","any one"],1,"inkor gapda anybody"],["She is ___ than her sister.",["more tall","taller","tallest","most tall"],1,"qisqa sifat + -er"],["We ___ dinner when the phone rang.",["had","were having","have","having"],1,"Past Continuous"],["How ___ water do you drink daily?",["many","much","few","a lot"],1,"sanalmaydigan ot: much"],["You ___ wear a seatbelt. It's the law.",["must","might","would","can"],0,"majburiyat: must"],["If you heat ice, it ___.",["melts","will melt","melted","would melt"],0,"Zero Conditional"],["This is the man ___ helped me.",["who","whose","which","where"],0,"odam uchun who"],["I'm interested ___ music.",["on","at","in","of"],2,"interested in"]]);
+PHRASAL.push.apply(PHRASAL,[["Please ___ your shoes before entering.",["take off","take up","take in","take after"],0,"take off"],["I ran ___ an old friend yesterday.",["into","out","off","away"],0,"run into"],["Don't ___! You can do it.",["give up","give in","give out","give off"],0,"give up"],["We ran ___ of milk.",["out","off","up","away"],0,"run out of"],["She ___ the TV to save energy.",["switched off","switched in","switched at","switched by"],0,"switch off"],["Can you ___ the music? I can't hear it.",["turn up","turn off","turn down","turn into"],0,"turn up"]]);
+BUSINESS.push.apply(BUSINESS,[["Thank you for your ___ reply.",["prompt","promptly","promptness","prompted"],0],["I am writing to ___ about the vacancy.",["enquire","require","acquire","inquiring"],0],["Please ___ me if you have any questions.",["contact","contract","contrast","contend"],0],["The meeting is ___ for 10 a.m.",["scheduled","scheduling","schedule","schedules"],0],["We would like to ___ our partnership.",["strengthen","strength","strengthening","strong"],0],["Best ___, Aziz (end of an email)",["regards","regard","regarding","regarded"],0]]);
+LISTENING.push.apply(LISTENING,[["My brother is a chef and he works at a hotel.",["Chef","Driver","Pilot","Nurse"],0,"chef"],["The shop opens at nine and closes at eight.",["Opens at 9","Opens at 8","Closes at 9","Opens at 10"],0,"opens at nine"],["It's freezing outside, so wear a warm coat.",["Wear a coat","Buy ice","Open windows","Swim"],0,"warm coat"],["Dinner is ready, please come to the table.",["Dinner is ready","Dinner is late","Lunch is ready","No dinner"],0,"dinner is ready"]]);
+var EXTRA=[[["They ___ my friends.",["is","am","are","be"],2],["___ is she from?",["What","Where","Who","How"],1]],[["I usually ___ to bed at ten.",["go","goes","going","went"],0],["There aren't ___ apples left.",["some","any","a","an"],1]],[["She has worked here ___ three years.",["for","since","from","at"],0],["I'm not used ___ spicy food.",["to eat","to eating","eating","eat"],1]],[["I'd rather you ___ smoke here.",["don't","didn't","won't","not"],1],["The meeting was called ___ because of the storm.",["off","out","on","up"],0]],[["Seldom ___ such a talented player.",["I have seen","have I seen","I saw","did I seen"],1],["She spoke ___ that nobody could ignore her.",["so passionately","such passionate","too passionately","enough passionate"],0]],[["The report was ___ of any real evidence.",["devoid","avoid","devote","deviate"],0],["Scarcely had she sat down ___ the phone rang.",["than","when","then","as"],1]]];
+var LESSONS=[{t:"To be: am / is / are",e:"I bilan am, he/she/it bilan is, you/we/they bilan are. Inkor: am not, isn't, aren't. Savolda fe'l gap boshiga chiqadi.",x:["I am a student.","She is at home.","Are they ready?"],q:[["They ___ at school.",["is","am","are","be"],2],["___ he your brother?",["Is","Are","Am","Be"],0]]},
+{t:"Present Simple",e:"Odatiy, takrorlanuvchi harakat. he/she/it bilan fe'lga -s qo'shiladi. Inkor: don't / doesn't + fe'l. Savol: Do / Does + ega + fe'l.",x:["She works every day.","I don't drink tea.","Does he play football?"],q:[["He ___ English every day.",["study","studies","studying","studied"],1],["She ___ like coffee.",["don't","doesn't","isn't","not"],1]]},
+{t:"Past Simple",e:"Tugagan o'tgan harakat. To'g'ri fe'llar -ed oladi, noto'g'rilari alohida shaklda (go - went). Inkor va savolda did + asosiy fe'l.",x:["I visited Samarkand last year.","He went home.","Did you see her?"],q:[["We ___ a film yesterday.",["watch","watched","watching","watches"],1],["Did she ___ the door?",["closed","close","closes","closing"],1]]},
+{t:"Present Perfect",e:"have/has + 3-shakl. Hozirga aloqador natija yoki tajriba: already, yet, ever, never. for - davomiylik, since - boshlanish payti.",x:["I have finished my work.","She has never been to Paris.","They have lived here since 2020."],q:[["I ___ already eaten.",["has","have","am","did"],1],["He has lived here ___ 2018.",["for","since","ago","from"],1]]},
+{t:"Shart gaplar",e:"Zero: If + hozirgi, hozirgi (fakt). First: If + hozirgi, will + fe'l (real kelajak). Second: If + o'tgan, would + fe'l (xayoliy). Third: If + had V3, would have V3 (o'tgan afsus).",x:["If it rains, I will stay home.","If I were you, I would go.","If I had known, I would have called."],q:[["If I ___ time, I would help you.",["have","had","will have","has"],1],["If it rains, we ___ at home.",["stay","would stay","will stay","stayed"],2]]},
+{t:"Artikllar: a / an / the",e:"a - undosh tovushdan oldin, an - unli tovushdan oldin (an apple). the - aniq, ma'lum narsa oldida. Sanalmaydigan otlar bilan a/an ishlatilmaydi.",x:["a book, an umbrella","The sun is hot.","I need water."],q:[["She is ___ engineer.",["a","an","the","-"],1],["___ moon goes around the Earth.",["A","An","The","-"],2]]}];
+var LT=["Yangi boshlovchi","O'quvchi","Izlanuvchi","Bilimdon","Usta","Ustoz","Legenda"],MS=[[3,50],[7,150],[14,300],[30,800]];
+function $app(h){document.getElementById("app").innerHTML=h}
+function tk(){var d=store.get(),t=todayISO();if(!d.tk||d.tk.d!==t)d.tk={d:t,ok:0,m:[],l:0,c:0};return d.tk}
+function taskHook(r){if(!store.get())return;var t=tk(),n=r.mode==="level"?30:(P&&P.q?P.q.length:10);t.ok+=Math.round(r.p/100*n);if(t.m.indexOf(r.mode)<0)t.m.push(r.mode);if(r.mode==="lesson")t.l=1}
+function lessonHook(){if(P.k==="lesson"&&P.s>=Math.ceil(P.q.length/2)){var d=store.get();d.cl=d.cl||{};if(!d.cl[P.LI]){d.cl[P.LI]=1;store.addXP(40);toast("🎓 Dars tugadi: +40 XP","success")}}}
+function tasks(){var t=tk();return[["20 ta savolga to'g'ri javob bering",t.ok,20],["2 xil bo'limda mashq qiling",t.m.length,2],["Bitta darsni tugating",t.l,1]]}
+function taskCard(){
+  var d=store.get(),T=tasks(),t=tk(),done=T.filter(function(x){return x[1]>=x[2]}).length;
+  var h='<section class="section"><div class="card" style="border-color:var(--primary)"><div class="section-head" style="margin-bottom:12px"><h2 style="font-size:24px">✅ Bugungi vazifalar <i class="nw">Yangi</i></h2><p>'+done+'/3 bajarildi</p></div>';
+  if(d.streak.days>0&&d.streak.last!==today())h+='<p class="warn-line">🔥 '+d.streak.days+' kunlik seriyangiz bugun uzilishi mumkin. Mashq qiling!</p>';
+  T.forEach(function(x){h+='<p style="margin-top:12px;font-weight:700;font-size:14px">'+(x[1]>=x[2]?"✅ ":"⬜ ")+x[0]+' <span style="color:var(--muted)">('+Math.min(x[1],x[2])+'/'+x[2]+')</span></p><div class="progress-mini" style="margin-top:6px"><i style="width:'+Math.min(100,Math.round(x[1]/x[2]*100))+'%"></i></div>'});
+  h+='<div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">'+(t.c?'<span class="chip good">🎁 Sandiq ochildi</span>':done===3?'<button class="btn primary" onclick="openChest()">🎁 Sandiqni ochish</button>':'<button class="btn primary" onclick="go(\'lessons\')">🎓 Dars boshlash</button><button class="btn" onclick="go(\'grammar\')">📘 Mashq</button>');
+  return h+'</div></div></section>';
+}
+window.openChest=function(){var t=tk();if(t.c||tasks().some(function(x){return x[1]<x[2]}))return;t.c=1;var xp=60+Math.floor(Math.random()*61);store.addXP(xp);store.updateStreak();updateStreakDisplay();confetti(70);toast("🎁 Sandiqdan +"+xp+" XP!","success");go($("#nav button.on").dataset.k)};
+function renderTasks(){$app(taskCard()+'<p style="color:var(--text-2);font-size:14px">Vazifalar har kuni yangilanadi. Uchalasini bajarsangiz, sandiqdan 60–120 XP olasiz.</p>')}
+function renderLessons(){var cl=store.get().cl||{},h='<section class="section"><div class="section-head"><h2>🎓 Darslar <i class="nw">Yangi</i></h2><p>Qisqa qoida va mashq. Har dars uchun +40 XP.</p></div><div class="grid">';
+  LESSONS.forEach(function(l,i){h+='<div class="card hoverable" onclick="openLesson('+i+')">'+(cl[i]?'<span class="chip good" style="position:absolute;top:16px;right:16px">✓ Tugagan</span>':'<span class="nw">Yangi</span>')+'<h3>'+esc(l.t)+'</h3><p>'+esc(l.e.slice(0,85))+'…</p></div>'});
+  $app(h+'</div></section>')}
+window.openLesson=function(i){var l=LESSONS[i];$app('<section class="quiz"><h2 class="q-text">'+esc(l.t)+'</h2><div class="passage"><b>Qoida</b>'+esc(l.e)+'</div><div class="passage"><b>Misollar</b>'+l.x.map(esc).join('<br>')+'</div><div class="quiz-nav"><button class="btn" onclick="go(\'lessons\')">← Darslar</button><button class="btn primary" onclick="startLesson('+i+')">Mashqni boshlash</button></div></section>')};
+function startLesson(i){var l=LESSONS[i];P={k:"lesson",LI:i,i:0,s:0,a:null,done:false,d:{t:"Dars: "+l.t},q:l.q.map(function(r){return{t:r[0],o:shuffle(r[1].map(function(x,j){return{x:x,c:j===r[2]}}))}})};renderPractice()}
+window.startLesson=startLesson;
+function renderRewards(){
+  var d=store.get(),xp=d.xp||0,lv=Math.floor(Math.sqrt(xp/60))+1,lo=Math.pow(lv-1,2)*60,hi=Math.pow(lv,2)*60;d.cm=d.cm||[];
+  var h='<section class="section"><div class="section-head"><h2>🎁 Mukofotlar <i class="nw">Yangi</i></h2><p>XP to\'plang, daraja oshiring, seriya uchun bonus oling.</p></div><div class="card" style="margin-bottom:20px"><h3>'+lv+'-daraja · '+LT[Math.min(6,Math.floor((lv-1)/2))]+'</h3><p style="margin:6px 0 12px">'+xp+' XP · keyingi darajaga '+(hi-xp)+' XP qoldi</p><div class="progress" style="margin:0"><i style="width:'+Math.round((xp-lo)/(hi-lo)*100)+'%"></i></div></div><div class="grid">';
+  MS.forEach(function(m){var got=d.cm.indexOf(m[0])>-1,ok=d.streak.best>=m[0];h+='<div class="card"><h3>🔥 '+m[0]+' kun seriya</h3><p>Mukofot: +'+m[1]+' XP</p>'+(got?'<span class="chip good">✅ Olingan</span>':ok?'<button class="btn primary sm" onclick="claimMs('+m[0]+')">Olish</button>':'<span class="chip">🔒 Hozir '+d.streak.days+'/'+m[0]+'</span>')+'</div>'});
+  $app(h+'</div></section>')}
+window.claimMs=function(m){var d=store.get(),e=MS.filter(function(x){return x[0]===m})[0];d.cm=d.cm||[];if(!e||d.cm.indexOf(m)>-1||d.streak.best<m)return;d.cm.push(m);store.addXP(e[1]);confetti(60);toast("🎁 +"+e[1]+" XP!","success");renderRewards()};
+function showNews(){try{if(localStorage.getItem("pogona_news6"))return;localStorage.setItem("pogona_news6","1")}catch(e){return}
+  openModal('<span class="modal-emoji">🚀</span><h2 style="font-size:24px;margin-bottom:12px">Yangiliklar</h2><p style="color:var(--text-2);text-align:left;font-size:14px;line-height:1.9;margin-bottom:22px">✅ <b>Kunlik vazifalar</b> va sandiq<br>🎓 <b>Darslar</b>: qoida va mashq<br>🎁 <b>Mukofotlar</b>: daraja va seriya bonuslari<br>📚 <b>Ko\'proq savollar</b> barcha bo\'limlarda</p><button class="btn primary" onclick="window.closeModal()">Boshlaymiz</button>')}
+/* tezlik: foydalanuvchilar ro'yxatini xotirada saqlash */
+var _ua=Users.all.bind(Users),_us=Users.save.bind(Users),UC=null;
+Users.all=function(){if(!UC)UC=_ua();return UC};Users.save=function(l){UC=l;_us(l)};
+window.addEventListener("storage",function(){UC=null});
 (function init(){
   /* Saqlangan foydalanuvchi bormi? */
   var savedId = Users.getCurrentId();
