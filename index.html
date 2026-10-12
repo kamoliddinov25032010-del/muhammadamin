@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uz"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pog'ona — mening ish stolim</title>
+<meta name="theme-color" content="#06162b">
+<link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06162b;--p:#0c2444;--p2:#12305a;--t:#f4efe3;--m:#8095b0;--l:rgba(244,239,227,.12);--c:#2ec4b6;--g:#e9b44c;--r:#ef6b5b;--ok:#34c38f;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+body{font:500 16px/1.55 Manrope,system-ui,sans-serif;background:var(--bg) repeating-conic-gradient(from 45deg,rgba(244,239,227,.025) 0 25%,transparent 0 50%) 0 0/56px 56px;color:var(--t);min-height:100vh;padding:env(safe-area-inset-top) 0 96px}
+h1,h2,h3,.big{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.03em;line-height:1.1}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;max-width:880px;margin:auto;gap:10px;flex-wrap:wrap}
+.brand{font:800 22px 'Bricolage Grotesque';display:flex;gap:10px;align-items:center}.brand i{width:30px;height:30px;border-radius:8px;background:linear-gradient(90deg,#1a5a8a 33%,#20998f 33% 66%,var(--g) 66%)}
+.chips{display:flex;gap:8px}.chip{background:var(--p);border:1px solid var(--l);padding:6px 12px;border-radius:99px;font-weight:700;font-size:13px;white-space:nowrap}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--p);border-top:1px solid var(--l);padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:9;justify-content:center;gap:2px}
+nav button{flex:1;max-width:120px;background:none;border:0;color:var(--m);font:700 11px Manrope;padding:6px 2px;border-radius:10px;min-height:48px;cursor:pointer}
+nav button b{display:block;font-size:19px}nav button.on{color:#04202b;background:var(--c)}
+main{max-width:880px;margin:auto;padding:8px 20px}
+.card{background:var(--p);border:1px solid var(--l);border-radius:16px;padding:20px;margin-bottom:16px}
+.hero{padding:28px 22px;background:linear-gradient(135deg,#0f3d6e,#0b6e72);border:0}.hero h1{font-size:clamp(30px,6vw,46px)}.hero p{color:#d6e4ee;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.st{background:var(--p);border:1px solid var(--l);border-radius:14px;padding:16px}.st .big{font-size:34px;color:var(--g)}.st span,.sub{color:var(--m);font-size:13px;font-weight:700}
+input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--l);color:var(--t);font:inherit;padding:12px 14px;border-radius:12px;min-height:46px}
+textarea{min-height:120px;resize:vertical}input:focus,select:focus,textarea:focus{outline:2px solid var(--c)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}.row>*{flex:1;min-width:120px}
+button.b{background:var(--c);color:#04202b;border:0;font:800 15px Manrope;padding:12px 20px;border-radius:12px;min-height:46px;cursor:pointer}
+button.b.o{background:none;color:var(--t);border:1px solid var(--l)}button.b.d{background:var(--r);color:#fff}button.x{background:none;border:0;color:var(--m);font-size:18px;cursor:pointer;min-width:40px;min-height:40px}
+.it{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--l)}.it:last-child{border:0}.it .tx{flex:1}.it.dn .tx{text-decoration:line-through;color:var(--m)}
+.ck{width:26px;height:26px;border-radius:8px;border:2px solid var(--m);background:none;cursor:pointer;color:#04202b;font-weight:800;flex:none}.dn .ck{background:var(--ok);border-color:var(--ok)}
+.tg{font-size:11px;font-weight:800;padding:2px 9px;border-radius:99px;background:var(--p2);color:var(--c);margin-left:6px}.tg.h{color:var(--r)}
+.fc{text-align:center;padding:44px 20px;cursor:pointer;min-height:220px}.fc .big{font-size:42px}.timer{font-size:clamp(64px,18vw,120px);text-align:center;font-variant-numeric:tabular-nums;color:var(--g)}
+.bars{display:flex;gap:8px;align-items:flex-end;height:140px}.bars div{flex:1;text-align:center;font-size:11px;color:var(--m)}.bars i{display:block;background:var(--c);border-radius:6px 6px 2px 2px;min-height:3px;margin-bottom:4px}
+.bar{height:8px;background:var(--bg);border-radius:9px;overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;background:var(--g)}
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--g);color:#2b1d03;font-weight:800;padding:10px 18px;border-radius:99px;z-index:20;opacity:0;transition:.25s;pointer-events:none;max-width:90vw;text-align:center}#toast.on{opacity:1}
+h2{font-size:26px;margin:6px 0 14px}:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+
+.subject-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.subject-card{background:linear-gradient(145deg,var(--p2),var(--p));border:1px solid var(--l);border-radius:15px;padding:16px}
+.progress-track{height:8px;background:var(--bg);border-radius:20px;overflow:hidden;margin:10px 0}
+.progress-track i{display:block;height:100%;background:linear-gradient(90deg,var(--c),#8b9cff);border-radius:20px}
+.small-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--m);font-weight:800}
+.stat-line{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--l)}
+.note-card{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(min-width:900px){main{max-width:1120px}nav{gap:4px}nav button{max-width:105px;font-size:10px}}
+@media(max-width:520px){main{padding:8px 12px}.card{padding:16px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}nav{overflow-x:auto;justify-content:flex-start}nav button{flex:0 0 74px}}
+</style></head><body>
+<header><div class="brand"><i></i>Pog'ona</div><div class="chips"><span class="chip" id="cs"></span><span class="chip" id="cl"></span></div></header>
+<main id="v"></main><nav id="nav"></nav><div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),E=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const iso=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const plus=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)},uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+let S={tasks:[],words:[],journal:[],focus:{},goal:{t:'',d:'',lv:'A1'},xp:0,days:{},name:'',subjects:[],notes:[],schedule:[],quizHistory:[]};
+try{Object.assign(S,JSON.parse(localStorage.getItem('pogona6')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('pogona6',JSON.stringify(S))}catch(e){toast("Saqlab bo'lmadi: xotira to'la")}};
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
+const lvl=()=>Math.floor(Math.sqrt(S.xp/50))+1;
+function streak(){let n=0,d=new Date();if(!S.days[iso(d)])d.setDate(d.getDate()-1);while(S.days[iso(d)]){n++;d.setDate(d.getDate()-1)}return n}
+function gain(n){S.xp+=n;S.days[iso()]=1;save();head()}
+function head(){$('#cs').textContent='🔥 '+streak()+' kun';$('#cl').textContent='⭐ '+lvl()+'-daraja · '+S.xp+' XP'}
+const SEED=[["improve","yaxshilamoq","I want to improve my English."],["goal","maqsad","My goal is to reach B1."],["habit","odat","Reading is a good habit."],["borrow","qarzga olmoq","Can I borrow your pen?"],["meeting","uchrashuv","I have a meeting at ten."],["deadline","oxirgi muddat","The deadline is Friday."],["schedule","jadval","Check the schedule."],["careful","ehtiyotkor","Be careful on the road."],["usually","odatda","I usually wake up at six."],["enough","yetarli","I have enough time."],["early","erta","She arrives early."],["remember","eslab qolmoq","I remember his name."]];
+const PROMPTS=["Bugun nima qildingiz?","Kelajakdagi orzuyingiz haqida yozing.","Sevimli taomingiz haqida yozing.","Do'stingizni tasvirlang.","Ertaga nimalarni rejalashtiryapsiz?","Eng yaxshi dam olish kuningiz qanday edi?","Nima uchun ingliz tilini o'rganyapsiz?"];
+const TABS=[['today','🏠','Bosh sahifa'],['subjects','🧠','Fanlar'],['tasks','✅','Vazifalar'],['schedule','🗓','Jadval'],['notes','📝','Konspekt'],['words','📚',"Lug'at"],['quiz','🧪','Test'],['focus','⏱','Fokus'],['diary','✍️','Kundalik'],['stats','📈','Tahlil'],['goal','⚙️','Sozlama']];
+let cur='today',review=null;
+$('#nav').innerHTML=TABS.map(t=>`<button data-a="go" data-i="${t[0]}" id="n-${t[0]}"><b>${t[1]}</b>${t[2]}</button>`).join('');
+function go(k){cur=k;review=null;TABS.forEach(t=>$('#n-'+t[0]).classList.toggle('on',t[0]===k));V[k]();scrollTo(0,0)}
+const due=()=>S.words.filter(w=>w.due<=iso()),open=()=>S.tasks.filter(t=>!t.done);
+const V={
+today(){
+  const hr=new Date().getHours(),hi=hr<5?'Xayrli tun':hr<12?'Xayrli tong':hr<18?'Xayrli kun':'Xayrli kech',w=SEED[Math.floor(Date.now()/864e5)%SEED.length],g=S.goal;
+  const dl=g.d?Math.ceil((new Date(g.d)-new Date(iso()))/864e5):null;
+  const todo=open().filter(t=>!t.date||t.date<=iso()).sort((a,b)=>b.pr-a.pr).slice(0,5);
+  $('#v').innerHTML=`<div class="card hero"><h1>${hi}, ${E(S.name||"do'stim")}!</h1><p>${new Date().toLocaleDateString('uz-UZ',{weekday:'long',day:'numeric',month:'long'})}${g.t?` · <b>${E(g.t)}</b>${dl!==null?dl>=0?` — ${dl} kun qoldi`:" — muddat o'tdi":''}`:''}</p></div>
+  <div class="grid"><div class="st"><div class="big">${streak()}</div><span>kunlik seriya</span></div><div class="st"><div class="big">${due().length}</div><span>takrorlanadigan so'z</span></div><div class="st"><div class="big">${open().length}</div><span>ochiq vazifa</span></div><div class="st"><div class="big">${S.focus[iso()]||0}</div><span>bugungi daqiqa</span></div></div>
+  <div class="card"><h3>Bugungi reja</h3>${todo.length?todo.map(taskRow).join(''):'<p class="sub" style="margin-top:8px">Bugun uchun vazifa yo\'q. Yangisini qo\'shing.</p>'}
+  <div class="row" style="margin:16px 0 0"><button class="b" data-a="go" data-i="${due().length?'words':'tasks'}">${due().length?"📚 So'zlarni takrorlash ("+due().length+')':"+ Vazifa qo'shish"}</button><button class="b o" data-a="go" data-i="focus">⏱ 25 daqiqa fokus</button></div></div>
+  <div class="card"><span class="sub">BUGUNGI SO'Z</span><h2 style="margin:6px 0">${w[0]} <span style="color:var(--g)">— ${w[1]}</span></h2><p class="sub">${w[2]}</p><button class="b o" style="margin-top:12px" data-a="addseed" data-i="${SEED.indexOf(w)}">+ Lug'atimga qo'shish</button></div>`},
+tasks(){
+  const done=S.tasks.filter(t=>t.done);
+  $('#v').innerHTML=`<h2>Vazifalar</h2><div class="card"><input id="tt" placeholder="Nima qilish kerak?" maxlength="120"><div class="row" style="margin-top:10px"><select id="tg"><option>ingliz</option><option>ish</option><option>shaxsiy</option></select><select id="pr"><option value="1">Oddiy</option><option value="2">Muhim</option></select><input id="td" type="date"></div><button class="b" data-a="addtask" style="width:100%">Qo'shish</button></div>
+  <div class="card">${open().length?open().sort((a,b)=>b.pr-a.pr||(a.date||'9').localeCompare(b.date||'9')).map(taskRow).join(''):'<p class="sub">Hammasi bajarilgan. Zo\'r! 🎉</p>'}</div>
+  ${done.length?`<div class="card"><span class="sub">BAJARILGAN (${done.length})</span>${done.slice(-8).reverse().map(taskRow).join('')}<button class="b o" data-a="clrdone" style="margin-top:12px">Tozalash</button></div>`:''}`},
+words(){
+  if(review)return rv();
+  const d=due();
+  $('#v').innerHTML=`<h2>Mening lug'atim</h2><div class="card"><div class="row"><input id="we" placeholder="English" maxlength="40"><input id="wu" placeholder="O'zbekcha" maxlength="60"></div><input id="wx" placeholder="Gap misoli (ixtiyoriy)" maxlength="120" style="margin-bottom:10px"><button class="b" data-a="addword" style="width:100%">Qo'shish</button></div>
+  <div class="card"><div class="row" style="margin:0"><button class="b" data-a="rv" ${d.length?'':'disabled style="opacity:.5"'}>🔁 Takrorlash (${d.length})</button>${S.words.length?'':'<button class="b o" data-a="seed">12 ta boshlang\'ich so\'z</button>'}</div><p class="sub" style="margin-top:10px">Jami ${S.words.length} ta so'z. Bilsangiz keyingi takror uzoqroqqa suriladi: 1, 3, 7, 14, 30 kun.</p></div>
+  <div class="card">${S.words.slice().reverse().map(w=>`<div class="it"><div class="tx"><b>${E(w.e)}</b> — ${E(w.u)}<div class="sub">${E(w.x||'')}</div></div><span class="tg">${w.b}/5</span><button class="x" data-a="delw" data-i="${w.id}">×</button></div>`).join('')||'<p class="sub">Hali so\'z yo\'q. Birinchisini qo\'shing.</p>'}</div>`},
+focus(){
+  $('#v').innerHTML=`<h2>Fokus</h2><div class="card"><p class="sub" style="text-align:center" id="tl"></p><div class="timer" id="tm"></div><div class="row" style="justify-content:center;margin:10px 0 0"><button class="b" data-a="tgl" id="tb"></button><button class="b o" data-a="rst">Qayta</button><button class="b o" data-a="mode">${T.m===25?'☕ 5 daqiqa dam':"📖 25 daqiqa o'qish"}</button></div></div>
+  <div class="card"><h3>So'nggi 7 kun (daqiqa)</h3><div class="bars" style="margin-top:14px">${[6,5,4,3,2,1,0].map(n=>{const d=new Date();d.setDate(d.getDate()-n);const v=S.focus[iso(d)]||0;return`<div><i style="height:${Math.min(100,v/3)}px"></i>${v}<br>${['Ya','Du','Se','Ch','Pa','Ju','Sh'][d.getDay()]}</div>`}).join('')}</div></div>`;tick()},
+diary(){
+  $('#v').innerHTML=`<h2>Kundalik</h2><div class="card"><span class="sub">BUGUNGI SAVOL</span><h3 style="margin:6px 0 12px">${PROMPTS[new Date().getDay()]}</h3><textarea id="dj" placeholder="Inglizcha 3-5 gap yozing. Xato qilsangiz ham mayli, asosiysi yozish!"></textarea><button class="b" data-a="addj" style="width:100%;margin-top:10px">Saqlash (+15 XP)</button></div>
+  ${S.journal.slice().reverse().map(j=>`<div class="card"><span class="sub">${j.d} · ${j.t.split(/\s+/).length} so'z</span><p style="margin-top:6px;white-space:pre-wrap">${E(j.t)}</p><button class="x" data-a="delj" data-i="${j.id}">× o'chirish</button></div>`).join('')}`},
+goal(){
+  const g=S.goal,tot=Object.values(S.focus).reduce((a,b)=>a+b,0),lo=Math.pow(lvl()-1,2)*50,hi=Math.pow(lvl(),2)*50;
+  $('#v').innerHTML=`<h2>Maqsad va sozlamalar</h2><div class="card"><input id="gn" placeholder="Ismingiz" value="${E(S.name)}" maxlength="20" style="margin-bottom:10px"><input id="gt" placeholder="Maqsadingiz (masalan: B1 ga yetish)" value="${E(g.t)}" maxlength="80" style="margin-bottom:10px"><div class="row"><input id="gd" type="date" value="${g.d}"><select id="gl">${['A1','A2','B1','B2','C1'].map(l=>`<option ${l===g.lv?'selected':''}>${l}</option>`).join('')}</select></div><button class="b" data-a="savegoal" style="width:100%">Saqlash</button></div>
+  <div class="card"><h3>Natijalaringiz</h3><p style="margin-top:8px">⭐ ${S.xp} XP · 🔥 ${streak()} kun · ✅ ${S.tasks.filter(t=>t.done).length} vazifa<br>📚 ${S.words.length} so'z · ✍️ ${S.journal.length} yozuv · ⏱ ${tot} daqiqa</p><div class="bar"><i style="width:${Math.round((S.xp-lo)/(hi-lo)*100)}%"></i></div><p class="sub" style="margin-top:6px">Keyingi darajaga ${hi-S.xp} XP</p></div>
+  <div class="card"><h3>Zaxira nusxa</h3><p class="sub" style="margin:6px 0 12px">Ma'lumotlar faqat shu qurilmada saqlanadi. Vaqti-vaqti bilan nusxa oling.</p><div class="row"><button class="b o" data-a="exp">⬇ Yuklab olish</button><button class="b o" data-a="imp">⬆ Tiklash</button></div></div>`}
+};
+
+function noteRow(n){const sub=(S.subjects||[]).find(s=>s.id===n.subject);return `<div class="card note-card" data-notetext="${E((n.title+' '+n.body+' '+(n.tags||'')).toLowerCase())}"><div class="row" style="align-items:start"><div style="flex:1"><span class="small-label">${E(sub?.name||'Umumiy')} · ${E(n.date||'')}</span><h3 style="margin:7px 0">${E(n.title)}</h3></div><button class="x" data-a="delnote" data-i="${n.id}">×</button></div><p>${E(n.body)}</p>${n.tags?`<p class="sub" style="margin-top:10px">Teglar: ${E(n.tags)}</p>`:''}</div>`}
+function filterNotes(){const q=($('#nsearch')?.value||'').toLowerCase();document.querySelectorAll('[data-notetext]').forEach(el=>el.style.display=el.dataset.notetext.includes(q)?'':'none')}
+function taskRow(t){const late=t.date&&t.date<iso()&&!t.done;return`<div class="it ${t.done?'dn':''}"><button class="ck" data-a="done" data-i="${t.id}">${t.done?'✓':''}</button><div class="tx">${E(t.t)}<span class="tg ${t.pr>1?'h':''}">${E(t.tag)}${t.pr>1?' !':''}</span>${t.date?`<div class="sub" style="${late?'color:var(--r)':''}">${late?'⚠ ':''}${t.date}</div>`:''}</div><button class="x" data-a="delt" data-i="${t.id}">×</button></div>`}
+function rv(){
+  const q=due();if(!q.length){review=null;toast('Takrorlash tugadi! 🎉');return go('words')}
+  const w=q[0];review.cur=w;
+  $('#v').innerHTML=`<h2>Takrorlash · ${q.length} ta qoldi</h2><div class="card fc" data-a="flip"><div class="big">${E(w.e)}</div>${review.show?`<p style="font-size:22px;margin-top:14px;color:var(--g)">${E(w.u)}</p><p class="sub" style="margin-top:8px">${E(w.x||'')}</p>`:'<p class="sub" style="margin-top:20px">Javobni ko\'rish uchun bosing</p>'}</div>${review.show?'<div class="row"><button class="b d" data-a="no">Bilmadim</button><button class="b" data-a="yes">Bilaman ✓</button></div>':''}<button class="b o" data-a="go" data-i="words">← Chiqish</button>`}
+const IV=[0,1,3,7,14,30];let T={m:25,end:0,left:1500,run:false,id:0};
+function tick(){
+  if(T.run){T.left=Math.max(0,Math.round((T.end-Date.now())/1000));if(!T.left){T.run=false;clearInterval(T.id);if(T.m===25){S.focus[iso()]=(S.focus[iso()]||0)+25;gain(10);toast('Fokus tugadi! +25 daqiqa, +10 XP 🎉')}else toast('Dam tugadi, davom etamiz!');T.m=T.m===25?5:25;T.left=T.m*60;document.title="Pog'ona";if(cur==='focus')return V.focus()}}
+  const m=$('#tm');if(!m)return;const s=T.left;m.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');$('#tb').textContent=T.run?"⏸ To'xtatish":'▶ Boshlash';$('#tl').textContent=T.m===25?"O'QISH VAQTI":'DAM OLISH';document.title=T.run?m.textContent+" · Pog'ona":"Pog'ona"}
+const A={
+go:k=>go(k),
+addsubject(){const name=$('#sbname').value.trim();if(name.length<2)return toast('Fan nomini kiriting');if((S.subjects||[]).some(s=>s.name.toLowerCase()===name.toLowerCase()))return toast('Bu fan allaqachon bor');const lev=+$('#sblevel').value;S.subjects.push({id:uid(),name,goal:$('#sbgoal').value.trim(),levelName:['','Boshlang‘ich','O‘rta','Murakkab'][lev],progress:0});save();gain(5);go('subjects');toast('Fan qo‘shildi +5 XP')},
+delsubject(i){if(!confirm('Fanni o‘chirasanmi?'))return;S.subjects=(S.subjects||[]).filter(s=>s.id!==i);(S.notes||[]).forEach(n=>{if(n.subject===i)n.subject=''});save();V.subjects()},
+savesubprogress(i){const s=(S.subjects||[]).find(s=>s.id===i);if(!s)return;s.progress=Math.max(0,Math.min(100,parseInt($('#sp-'+i).value)||0));save();V.subjects();toast('O‘zlashtirish saqlandi')},
+newnotesub(i){go('notes');setTimeout(()=>{if($('#nsubject'))$('#nsubject').value=i},0)},
+addschedule(){const title=$('#sctitle').value.trim();if(!title)return toast('Dars nomini yoz');S.schedule.push({id:uid(),day:+$('#scday').value,time:$('#sctime').value,title,subject:$('#scsubject').value,place:$('#scplace').value.trim()});save();V.schedule();toast('Jadvalga qo‘shildi')},
+delschedule(i){S.schedule=(S.schedule||[]).filter(x=>x.id!==i);save();V.schedule()},
+addnote(){const title=$('#ntitle').value.trim(),body=$('#nbody').value.trim();if(!title||body.length<5)return toast('Sarlavha va konspekt matnini kiriting');S.notes.push({id:uid(),title,body,subject:$('#nsubject').value,tags:$('#ntags').value.trim(),date:iso()});save();gain(5);V.notes();toast('Konspekt saqlandi +5 XP')},
+delnote(i){S.notes=(S.notes||[]).filter(n=>n.id!==i);save();V.notes()},
+quizanswer(i){const q=window.__activeQuiz;if(!q)return;const right=+i===q.c;S.quizHistory=S.quizHistory||[];S.quizHistory.push({date:iso(),correct:right});save();const r=$('#quizresult');if(r){r.innerHTML=`<div class="card" style="margin-top:14px"><h3>${right?'To‘g‘ri javob!':'Bu safar xato.'}</h3><p style="margin-top:8px">${E(q.w)}</p><p class="sub" style="margin-top:8px">To‘g‘ri javob: ${E(q.a[q.c])}</p></div>`;document.querySelectorAll('[data-a="quizanswer"]').forEach(b=>b.disabled=true)}if(right)gain(8)},
+
+done(i){const t=S.tasks.find(x=>x.id===i);t.done=!t.done;if(t.done){gain(t.pr>1?15:10);toast('+'+(t.pr>1?15:10)+' XP ✅')}else save();V[cur]()},
+delt(i){S.tasks=S.tasks.filter(x=>x.id!==i);save();V[cur]()},
+clrdone(){S.tasks=S.tasks.filter(x=>!x.done);save();V.tasks()},
+addtask(){const t=$('#tt').value.trim();if(!t)return toast('Vazifani yozing');S.tasks.push({id:uid(),t,tag:$('#tg').value,pr:+$('#pr').value,date:$('#td').value,done:false});save();V.tasks()},
+addword(){const e=$('#we').value.trim(),u=$('#wu').value.trim();if(!e||!u)return toast("So'z va tarjimani yozing");S.words.push({id:uid(),e,u,x:$('#wx').value.trim(),b:0,due:iso()});gain(3);V.words()},
+addseed(i){const w=SEED[i];if(S.words.some(x=>x.e===w[0]))return toast('Allaqachon bor');S.words.push({id:uid(),e:w[0],u:w[1],x:w[2],b:0,due:iso()});gain(3);toast("Qo'shildi 📚")},
+seed(){SEED.forEach(w=>S.words.push({id:uid(),e:w[0],u:w[1],x:w[2],b:0,due:iso()}));save();V.words()},
+delw(i){S.words=S.words.filter(x=>x.id!==i);save();V.words()},
+rv(){review={show:false};V.words()},flip(){review.show=true;rv()},
+yes(){const w=review.cur;w.b=Math.min(5,w.b+1);w.due=plus(IV[w.b]);gain(5);review.show=false;rv()},
+no(){const w=review.cur;w.b=0;w.due=iso();S.words.push(S.words.splice(S.words.indexOf(w),1)[0]);save();review.show=false;rv()},
+tgl(){if(T.run){T.run=false;clearInterval(T.id)}else{T.run=true;T.end=Date.now()+T.left*1000;T.id=setInterval(tick,500)}tick()},
+rst(){T.run=false;clearInterval(T.id);T.left=T.m*60;tick()},
+mode(){A.rst();T.m=T.m===25?5:25;T.left=T.m*60;V.focus()},
+addj(){const t=$('#dj').value.trim();if(t.split(/\s+/).length<4)return toast("Kamida 4 ta so'z yozing");S.journal.push({id:uid(),d:iso(),t});gain(15);toast('Yozuv saqlandi +15 XP ✍️');V.diary()},
+delj(i){S.journal=S.journal.filter(x=>x.id!==i);save();V.diary()},
+savegoal(){S.name=$('#gn').value.trim();S.goal={t:$('#gt').value.trim(),d:$('#gd').value,lv:$('#gl').value};save();toast('Saqlandi ✓')},
+exp(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));a.download='pogona-zaxira-'+iso()+'.json';a.click()},
+imp(){const f=document.createElement('input');f.type='file';f.accept='.json';f.onchange=()=>f.files[0].text().then(x=>{try{const d=JSON.parse(x);if(!d||typeof d!=='object'||!Array.isArray(d.tasks))throw 0;S=Object.assign({tasks:[],words:[],journal:[],focus:{},goal:{t:'',d:'',lv:'A1'},xp:0,days:{},name:'',subjects:[],notes:[],schedule:[],quizHistory:[]},d);save();head();go('goal');toast('Tiklandi ✓')}catch(e){toast("Fayl noto'g'ri")}});f.click()}
+};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&A[b.dataset.a])A[b.dataset.a](b.dataset.i)});
+if(!S.name){const n=prompt('Ismingiz nima?');if(n){S.name=n.trim().slice(0,20);save()}}
+head();go('today');
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+</script></body></html>
